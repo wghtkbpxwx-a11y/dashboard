@@ -125,14 +125,14 @@ button{font-family:var(--f);cursor:pointer}
 }
 .modebt{
   flex:1;
-  padding:13px 18px;
+  padding:12px 10px;
   border-radius:100px;
   border:1px solid transparent;
   background:var(--surface);
   color:var(--t3);
-  font-size:14px;
+  font-size:12px;
   font-weight:600;
-  letter-spacing:1.4px;
+  letter-spacing:0.9px;
   text-transform:uppercase;
   transition:all .22s ease;
 }
@@ -198,6 +198,10 @@ button{font-family:var(--f);cursor:pointer}
 .ic-tg{background:linear-gradient(150deg,#3ec6ff 0%,#1d9bdf 60%,#0d83c4 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(45,171,238,0.6)}
 .ic-ms{background:linear-gradient(150deg,#00c6ff 0%,#0a7cff 42%,#9a3df0 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(98,103,255,0.6)}
 .ic-gm{background:linear-gradient(150deg,#ffffff,#f1f3f6);box-shadow:inset 0 1px 0 rgba(255,255,255,0.9),0 8px 22px -8px rgba(234,67,53,0.45)}
+.ic-notes{background:linear-gradient(150deg,#FFE434,#FFB800,#FF9500);box-shadow:inset 0 1px 0 rgba(255,255,255,0.35),0 8px 22px -8px rgba(255,180,0,0.65)}
+.ic-remind{background:linear-gradient(150deg,#FF8C7A,#FF453A,#D62C24);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(255,69,58,0.65)}
+.ic-drive{background:linear-gradient(150deg,#70D4FF,#1A9EFF,#0A7AFF);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(10,132,255,0.65)}
+.ic-photos{background:linear-gradient(135deg,#FF9500 0%,#FF2D55 40%,#BF5AF2 72%,#5856D6 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(191,90,242,0.55)}
 
 .rl{flex:1;min-width:0}
 .rl-t{font-size:19px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-0.2px}
@@ -387,6 +391,7 @@ button{font-family:var(--f);cursor:pointer}
 <nav id="modenav">
   <button class="modebt on" data-p="live">Live</button>
   <button class="modebt" data-p="msg">Messages</button>
+  <button class="modebt" data-p="apple">Apple</button>
   <button class="modebt" data-p="cap">Capture</button>
 </nav>
 
@@ -469,6 +474,73 @@ button{font-family:var(--f);cursor:pointer}
       <div class="rl"><div class="rl-t">Gmail</div><div class="rl-s">Open inbox</div></div>
       <span class="chev">›</span>
     </a>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════
+     APPLE PANEL
+══════════════════════════ -->
+<section class="panel" id="panel-apple">
+
+  <div class="sec">Productivity</div>
+  <div class="cardgroup">
+    <a class="row" href="https://www.icloud.com/notes" target="_blank">
+      <div class="appicon ic-notes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.75)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="rgba(0,0,0,0.10)" stroke="rgba(0,0,0,0.55)"/>
+          <polyline points="14 2 14 8 20 8" stroke="rgba(0,0,0,0.55)"/>
+          <line x1="8" y1="13" x2="16" y2="13"/>
+          <line x1="8" y1="16.5" x2="14" y2="16.5"/>
+          <line x1="8" y1="10" x2="10" y2="10"/>
+        </svg>
+      </div>
+      <div class="rl"><div class="rl-t">Notes</div><div class="rl-s">iCloud Notes</div></div>
+      <span class="chev">›</span>
+    </a>
+    <a class="row" href="https://www.icloud.com/reminders" target="_blank">
+      <div class="appicon ic-remind">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="9" y1="6" x2="20" y2="6"/>
+          <line x1="9" y1="12" x2="20" y2="12"/>
+          <line x1="9" y1="18" x2="20" y2="18"/>
+          <circle cx="4.5" cy="6" r="1.5" fill="white" stroke="none"/>
+          <circle cx="4.5" cy="12" r="1.5" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1.5"/>
+          <circle cx="4.5" cy="18" r="1.5" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="rl"><div class="rl-t">Reminders</div><div class="rl-s">iCloud Reminders</div></div>
+      <span class="chev">›</span>
+    </a>
+  </div>
+
+  <div class="sec">Storage</div>
+  <div class="cardgroup">
+    <a class="row" href="https://www.icloud.com/iclouddrive" target="_blank">
+      <div class="appicon ic-drive">
+        <svg viewBox="0 0 24 24" fill="white">
+          <path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+        </svg>
+      </div>
+      <div class="rl"><div class="rl-t">Files</div><div class="rl-s">iCloud Drive</div></div>
+      <span class="chev">›</span>
+    </a>
+    <a class="row" href="https://www.icloud.com/photos" target="_blank">
+      <div class="appicon ic-photos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2.5" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.6)"/>
+          <circle cx="8.5" cy="8.5" r="1.8" fill="white" stroke="none"/>
+          <polyline points="3 16 8 11 12.5 15.5 15 13 21 18" stroke="white" stroke-width="1.8"/>
+        </svg>
+      </div>
+      <div class="rl"><div class="rl-t">Photos</div><div class="rl-s">iCloud Photos</div></div>
+      <span class="chev">›</span>
+    </a>
+  </div>
+
+  <div style="margin-top:20px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);display:flex;gap:10px;align-items:flex-start">
+    <span style="color:var(--accent);font-size:15px;flex-shrink:0;margin-top:1px">ⓘ</span>
+    <span style="font-size:13px;color:var(--t3);line-height:1.5;letter-spacing:0.2px">Apple blocks embedding iCloud in external pages. Tapping opens each service in the browser where you can sign in to your Apple ID.</span>
   </div>
 
 </section>
