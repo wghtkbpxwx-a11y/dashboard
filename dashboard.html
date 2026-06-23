@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Dashboard</title>
+<style>
+:root {
+  --bg:        #0c0c0e;
+  --bg2:       #131316;
+  --bg3:       #1a1a1e;
+  --bg4:       #232328;
+  --bg5:       #2c2c32;
+  --line:      rgba(255,255,255,0.065);
+  --line2:     rgba(255,255,255,0.11);
+  --t1:        #eaeaec;
+  --t2:        #8a8a94;
+  --t3:        #4e4e58;
+  --accent:    #5b9cf6;
+  --accent-bg: rgba(91,156,246,0.10);
+  --accent-b:  rgba(91,156,246,0.28);
+  --red:       #e05252;
+  --r: 9px;
+  --rs: 6px;
+  --f: -apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{
+  background:var(--bg);
+  color:var(--t1);
+  font-family:var(--f);
+  min-height:100dvh;
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior:none;
+  max-width:540px;
+  margin:0 auto;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--f);cursor:pointer}
+
+/* ── STATUS BAR ── */
+#status{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:env(safe-area-inset-top,12px) 20px 12px;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:200;
+  background:var(--bg);
+  backdrop-filter:blur(20px);
+}
+#s-left{display:flex;flex-direction:column;gap:2px}
+#s-time{font-size:22px;font-weight:300;letter-spacing:-0.6px;line-height:1}
+#s-date{font-size:10px;letter-spacing:0.8px;text-transform:uppercase;color:var(--t3)}
+#s-right{display:flex;gap:14px;align-items:center}
+.s-chip{font-size:11px;color:var(--t2);letter-spacing:0.2px}
+.s-chip.live{color:var(--accent);display:flex;align-items:center;gap:5px}
+.live-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--accent);
+  animation:blink 2.4s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}55%{opacity:0.25}}
+
+/* ── MODE NAV ── */
+#modenav{
+  display:flex;
+  gap:2px;
+  padding:10px 14px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:57px;
+  z-index:199;
+  background:var(--bg);
+}
+#modenav::-webkit-scrollbar{display:none}
+.modebt{
+  flex-shrink:0;
+  padding:6px 14px;
+  border-radius:20px;
+  border:none;
+  background:transparent;
+  color:var(--t3);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  transition:color .18s,background .18s;
+}
+.modebt.on{background:var(--bg4);color:var(--t1)}
+.modebt:hover:not(.on){color:var(--t2)}
+
+/* ── PANELS ── */
+#content{padding-bottom:env(safe-area-inset-bottom,24px)}
+.panel{display:none;animation:fadeIn .2s ease}
+.panel.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ── SHARED COMPONENTS ── */
+.sec{
+  padding:18px 20px 7px;
+  font-size:9.5px;
+  font-weight:600;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+  color:var(--t3);
+}
+.row{
+  display:flex;
+  align-items:center;
+  padding:13px 20px;
+  border-bottom:1px solid var(--line);
+  gap:13px;
+  cursor:pointer;
+  transition:background .14s;
+  color:inherit;
+}
+.row:hover,.row:active{background:var(--bg2)}
+.icon{
+  width:36px;height:36px;border-radius:var(--rs);
+  background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:15px;
+}
+.icon.accent{background:var(--accent-bg);border:1px solid var(--accent-b)}
+.rl{flex:1;min-width:0}
+.rl-t{font-size:14px;font-weight:400;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rl-s{font-size:11px;color:var(--t3);margin-top:2px}
+.chev{color:var(--t3);font-size:14px;line-height:1;flex-shrink:0}
+
+/* ── INNER TABS ── */
+.itabs{
+  display:flex;
+  padding:0 20px;
+  border-bottom:1px solid var(--line);
+  gap:0;
+}
+.itab{
+  padding:13px 0;
+  margin-right:22px;
+  font-size:12.5px;
+  font-weight:500;
+  color:var(--t3);
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:color .18s,border-color .18s;
+  letter-spacing:0.1px;
+}
+.itab.on{color:var(--t1);border-bottom-color:var(--accent)}
+
+/* ── NEWS HEADLINES ── */
+.hl{
+  padding:13px 20px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+  transition:background .14s;
+  display:block;
+}
+.hl:hover,.hl:active{background:var(--bg2)}
+.hl-t{font-size:13.5px;line-height:1.42;color:var(--t1);font-weight:400}
+.hl-m{font-size:10.5px;color:var(--t3);margin-top:4px;display:flex;gap:6px}
+.src-tag{color:var(--t2)}
+
+/* ── TEAM CHIPS ── */
+.teamfilter{
+  display:flex;gap:7px;
+  padding:11px 16px;
+  overflow-x:auto;scrollbar-width:none;
+  border-bottom:1px solid var(--line);
+}
+.teamfilter::-webkit-scrollbar{display:none}
+.tchip{
+  flex-shrink:0;
+  padding:5px 12px;
+  border-radius:16px;
+  border:1px solid var(--line2);
+  background:transparent;
+  color:var(--t2);
+  font-size:10.5px;
+  font-weight:500;
+  letter-spacing:0.3px;
+  transition:all .18s;
+}
+.tchip.on{
+  background:var(--accent-bg);
+  border-color:var(--accent-b);
+  color:var(--accent);
+}
+
+/* ── SCORE CARD ── */
+.scard{
+  margin:11px 16px;
+  padding:14px 18px;
+  background:var(--bg2);
+  border:1px solid var(--line2);
+  border-radius:var(--r);
+}
+.scard-hd{
+  font-size:9.5px;text-transform:uppercase;letter-spacing:0.9px;
+  color:var(--t3);margin-bottom:10px;display:flex;align-items:center;gap:7px;
+}
+.steams{display:flex;align-items:center;justify-content:space-between}
+.steam{text-align:center;flex:1}
+.steam-n{font-size:12px;font-weight:500;color:var(--t2);letter-spacing:0.3px}
+.steam-s{font-size:30px;font-weight:200;letter-spacing:-1.5px;color:var(--t1);line-height:1.1}
+.sdash{font-size:13px;color:var(--t3);padding:0 10px}
+
+/* ── NAV GRID ── */
+.ngrid{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  gap:1px;background:var(--line);
+}
+.ntile{
+  background:var(--bg);padding:15px 16px;
+  cursor:pointer;transition:background .14s;display:block;
+}
+.ntile:hover,.ntile:active{background:var(--bg2)}
+.ntile-ic{font-size:20px;margin-bottom:5px}
+.ntile-l{font-size:13px;color:var(--t1)}
+.ntile-a{font-size:10.5px;color:var(--t3);margin-top:2px}
+
+/* ── DRIVE BANNER ── */
+.drivebanner{
+  padding:20px;
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.db-l{}
+.db-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:4px}
+.db-time{font-size:36px;font-weight:200;letter-spacing:-2px;color:var(--t1);line-height:1}
+.db-date{font-size:11px;color:var(--t3);margin-top:3px}
+.db-r{
+  text-align:right;
+}
+.db-r-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:0.8px;color:var(--t3);margin-bottom:3px}
+.db-r-val{font-size:13px;color:var(--t2)}
+
+/* ── CONTACTS ── */
+.crow{
+  display:flex;align-items:center;
+  padding:12px 20px;border-bottom:1px solid var(--line);
+  gap:13px;cursor:pointer;transition:background .14s;
+}
+.crow:hover,.crow:active{background:var(--bg2)}
+.cavatar{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--bg4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:500;color:var(--t2);
+  flex-shrink:0;border:1px solid var(--line2);
+}
+.cinfo{flex:1;min-width:0}
+.cn{font-size:14px;color:var(--t1)}
+.cv{font-size:10.5px;color:var(--t3);margin-top:2px}
+.cact{font-size:11px;color:var(--accent);flex-shrink:0}
+
+/* ── TRAY ── */
+.tray{border-top:1px solid var(--line)}
+.trayhd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 20px;cursor:pointer;
+  font-size:11px;font-weight:500;letter-spacing:0.4px;color:var(--t3);
+  transition:color .15s;
+}
+.trayhd:hover{color:var(--t2)}
+.trayhd svg{transition:transform .2s;flex-shrink:0}
+.tray.open .trayhd svg{transform:rotate(180deg)}
+.traybody{display:none}
+.tray.open .traybody{display:block}
+
+/* ── CAPTURE ── */
+.capwrap{padding:15px}
+.capbox{
+  width:100%;
+  background:var(--bg2);
+  border:1px solid var(--line2);
+  border-radius:var(--r);
+  color:var(--t1);
+  font-family:var(--f);
+  font-size:14px;
+  line-height:1.5;
+  padding:13px 14px;
+  min-height:120px;
+  resize:none;
+  outline:none;
+  transition:border-color .2s;
+}
+.capbox:focus{border-color:var(--accent)}
+.capbox::placeholder{color:var(--t3)}
+.capbtns{display:flex;gap:8px;margin-top:9px}
+.btn{
+  padding:9px 16px;border-radius:var(--rs);
+  border:none;font-size:12px;font-weight:500;
+  transition:opacity .15s,background .15s;
+}
+.btn-pri{background:var(--accent);color:#fff}
+.btn-pri:hover{opacity:0.88}
+.btn-ghost{background:var(--bg3);color:var(--t2);border:1px solid var(--line2)}
+.btn-ghost:hover{background:var(--bg4)}
+.btn-voice{
+  background:var(--bg3);color:var(--t2);
+  border:1px solid var(--line2);
+  display:flex;align-items:center;gap:5px;
+  margin-left:auto;
+}
+.btn-voice.rec{
+  background:rgba(224,82,82,0.10);
+  color:var(--red);
+  border-color:rgba(224,82,82,0.28);
+}
+
+/* ── NOTES LIST ── */
+.noterow{
+  display:flex;align-items:flex-start;
+  padding:11px 20px;border-bottom:1px solid var(--line);
+  gap:10px;
+}
+.note-time{font-size:9.5px;color:var(--t3);flex-shrink:0;padding-top:2px;letter-spacing:0.3px}
+.note-text{flex:1;font-size:12.5px;color:var(--t2);line-height:1.45}
+.note-del{
+  background:none;border:none;
+  color:var(--t3);font-size:16px;line-height:1;
+  flex-shrink:0;padding:0;cursor:pointer;
+  transition:color .15s;
+}
+.note-del:hover{color:var(--red)}
+
+/* ── WEATHER BANNER (drive) ── */
+.wstrip{
+  display:flex;align-items:center;gap:18px;
+  padding:10px 20px;border-bottom:1px solid var(--line);
+  font-size:11px;color:var(--t3);
+}
+.wstrip span{display:flex;align-items:center;gap:5px}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--line);margin:4px 0}
+
+/* ── EMPTY ── */
+.empty{padding:20px;font-size:12px;color:var(--t3);text-align:center}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- ══ STATUS BAR ══ -->
+<header id="status">
+  <div id="s-left">
+    <div id="s-time">--:--</div>
+    <div id="s-date">———</div>
+  </div>
+  <div id="s-right">
+    <span class="s-chip" id="s-weather">— °</span>
+    <span class="s-chip live"><span class="live-dot"></span>Live</span>
+  </div>
+</header>
+
+<!-- ══ MODE NAV ══ -->
+<nav id="modenav">
+  <button class="modebt on" data-p="drive">Drive</button>
+  <button class="modebt" data-p="live">Live</button>
+  <button class="modebt" data-p="media">Media</button>
+  <button class="modebt" data-p="msg">Messages</button>
+  <button class="modebt" data-p="cap">Capture</button>
+</nav>
+
+<main id="content">
+
+<!-- ══════════════════════════
+     DRIVE PANEL
+══════════════════════════ -->
+<section class="panel on" id="panel-drive">
+
+  <div class="drivebanner">
+    <div class="db-l">
+      <div class="db-lbl">Now</div>
+      <div class="db-time" id="d-time">--:--</div>
+      <div class="db-date" id="d-date">———</div>
+    </div>
+    <div class="db-r">
+      <div class="db-r-lbl">Conditions</div>
+      <div class="db-r-val" id="d-weather">—</div>
+    </div>
+  </div>
+
+  <div class="sec">Navigation</div>
+  <div class="ngrid">
+    <!--
+      SWAP THESE: Replace href values with your actual addresses.
+      Apple Maps deeplinks: maps.apple.com/?daddr=ADDRESS
+      Google Maps: maps.google.com/?q=ADDRESS
+    -->
+    <a class="ntile" href="maps.apple.com/?daddr=Home" target="_blank">
+      <div class="ntile-ic">🏠</div>
+      <div class="ntile-l">Home</div>
+      <div class="ntile-a">Set your home address</div>
+    </a>
+    <a class="ntile" href="maps.apple.com/?daddr=Work" target="_blank">
+      <div class="ntile-ic">📍</div>
+      <div class="ntile-l">Frequent</div>
+      <div class="ntile-a">Set a saved place</div>
+    </a>
+    <a class="ntile" href="maps.apple.com/?q=Supercharger+near+me" target="_blank">
+      <div class="ntile-ic">⚡</div>
+      <div class="ntile-l">Charging</div>
+      <div class="ntile-a">Nearest Supercharger</div>
+    </a>
+    <a class="ntile" href="maps.apple.com/" target="_blank">
+      <div class="ntile-ic">🗺</div>
+      <div class="ntile-l">Explore</div>
+      <div class="ntile-a">Open Maps</div>
+    </a>
+  </div>
+
+  <div class="sec">Media</div>
+  <!-- SWAP: Update hrefs and labels to match your preferred services -->
+  <a class="row" href="https://music.apple.com" target="_blank">
+    <div class="icon">🎵</div>
+    <div class="rl">
+      <div class="rl-t">Apple Music</div>
+      <div class="rl-s">Continue listening</div>
+    </div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://open.spotify.com" target="_blank">
+    <div class="icon">🎧</div>
+    <div class="rl">
+      <div class="rl-t">Spotify</div>
+      <div class="rl-s">Playlists &amp; podcasts</div>
+    </div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://podcasts.apple.com" target="_blank">
+    <div class="icon">🎙</div>
+    <div class="rl">
+      <div class="rl-t">Podcasts</div>
+      <div class="rl-s">Continue episode</div>
+    </div>
+    <span class="chev">›</span>
+  </a>
+
+  <div class="sec">Quick Actions</div>
+  <a class="row" href="sms:" target="_blank">
+    <div class="icon accent">💬</div>
+    <div class="rl">
+      <div class="rl-t">Messages</div>
+      <div class="rl-s">Open iMessage</div>
+    </div>
+    <span class="chev">›</span>
+  </a>
+  <!-- SWAP: Replace with your garage, gate, or shortcut app deeplinks -->
+  <a class="row" href="#" onclick="switchPanel('cap');return false">
+    <div class="icon accent">📝</div>
+    <div class="rl">
+      <div class="rl-t">Quick Note</div>
+      <div class="rl-s">Capture a thought</div>
+    </div>
+    <span class="chev">›</span>
+  </a>
+
+</section>
+
+<!-- ══════════════════════════
+     LIVE PANEL (NEWS + SPORTS)
+══════════════════════════ -->
+<section class="panel" id="panel-live">
+
+  <div class="itabs">
+    <div class="itab on" data-sub="news">News</div>
+    <div class="itab" data-sub="sports">Sports</div>
+  </div>
+
+  <!-- News sub-panel -->
+  <div id="sub-news">
+    <div style="padding:10px 20px 2px;display:flex;align-items:center;gap:7px">
+      <span class="live-dot"></span>
+      <span style="font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">Headlines</span>
+    </div>
+    <div id="news-list"></div>
+    <!--
+      SWAP FEEDS: Replace NEWS array in JS below with fetched data.
+      Recommended sources: CBC RSS, Globe & Mail, Reuters, AP News.
+      Use a CORS proxy or a backend endpoint if fetching RSS in-browser.
+    -->
+  </div>
+
+  <!-- Sports sub-panel -->
+  <div id="sub-sports" style="display:none">
+    <div class="teamfilter">
+      <button class="tchip on" data-team="all">All</button>
+      <button class="tchip" data-team="canucks">Canucks</button>
+      <button class="tchip" data-team="seahawks">Seahawks</button>
+      <button class="tchip" data-team="bclions">BC Lions</button>
+      <button class="tchip" data-team="bluejays">Blue Jays</button>
+      <button class="tchip" data-team="raptors">Raptors</button>
+    </div>
+    <div id="sports-list"></div>
+    <!--
+      SWAP SPORTS DATA: Replace SPORTS array in JS with live data.
+      Recommended: ESPN undocumented API, Sportsnet RSS, or a sports API like TheSportsDB.
+      Team slugs match the data-team attributes above.
+    -->
+  </div>
+
+</section>
+
+<!-- ══════════════════════════
+     MEDIA PANEL
+══════════════════════════ -->
+<section class="panel" id="panel-media">
+
+  <div class="sec">Music</div>
+  <!-- SWAP: Update all hrefs to match your preferred services/playlists -->
+  <a class="row" href="https://music.apple.com" target="_blank">
+    <div class="icon">🍎</div>
+    <div class="rl"><div class="rl-t">Apple Music</div><div class="rl-s">Library, Radio, Stations</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://open.spotify.com" target="_blank">
+    <div class="icon">🎵</div>
+    <div class="rl"><div class="rl-t">Spotify</div><div class="rl-s">Discover Weekly, Playlists</div></div>
+    <span class="chev">›</span>
+  </a>
+
+  <div class="sec">Podcasts</div>
+  <a class="row" href="https://podcasts.apple.com" target="_blank">
+    <div class="icon">🎙</div>
+    <div class="rl"><div class="rl-t">Apple Podcasts</div><div class="rl-s">Continue listening</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://pocketcasts.com" target="_blank">
+    <div class="icon">🎚</div>
+    <div class="rl"><div class="rl-t">Pocket Casts</div><div class="rl-s">Up next queue</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://www.audible.com" target="_blank">
+    <div class="icon">📖</div>
+    <div class="rl"><div class="rl-t">Audible</div><div class="rl-s">Audiobooks</div></div>
+    <span class="chev">›</span>
+  </a>
+
+  <div class="sec">Video</div>
+  <a class="row" href="https://youtube.com" target="_blank">
+    <div class="icon">▶</div>
+    <div class="rl"><div class="rl-t">YouTube</div><div class="rl-s">Subscriptions &amp; feed</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://netflix.com" target="_blank">
+    <div class="icon">🎬</div>
+    <div class="rl"><div class="rl-t">Netflix</div><div class="rl-s">Continue watching</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://tv.apple.com" target="_blank">
+    <div class="icon">📺</div>
+    <div class="rl"><div class="rl-t">Apple TV+</div><div class="rl-s">Continue watching</div></div>
+    <span class="chev">›</span>
+  </a>
+
+  <div class="tray" id="tray-media">
+    <div class="trayhd" onclick="toggleTray('tray-media')">
+      More Services
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+        <path d="M1.5 3.5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="traybody">
+      <!-- SWAP: Add/remove services as needed -->
+      <a class="row" href="https://disneyplus.com" target="_blank">
+        <div class="icon">✨</div>
+        <div class="rl"><div class="rl-t">Disney+</div></div>
+        <span class="chev">›</span>
+      </a>
+      <a class="row" href="https://primevideo.com" target="_blank">
+        <div class="icon">📦</div>
+        <div class="rl"><div class="rl-t">Prime Video</div></div>
+        <span class="chev">›</span>
+      </a>
+      <a class="row" href="https://crave.ca" target="_blank">
+        <div class="icon">🎭</div>
+        <div class="rl"><div class="rl-t">Crave</div><div class="rl-s">Canadian content</div></div>
+        <span class="chev">›</span>
+      </a>
+      <a class="row" href="https://sportsnet.ca" target="_blank">
+        <div class="icon">🏒</div>
+        <div class="rl"><div class="rl-t">Sportsnet</div><div class="rl-s">Live games &amp; highlights</div></div>
+        <span class="chev">›</span>
+      </a>
+      <a class="row" href="https://tsn.ca" target="_blank">
+        <div class="icon">🏈</div>
+        <div class="rl"><div class="rl-t">TSN</div><div class="rl-s">Live sports</div></div>
+        <span class="chev">›</span>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════
+     MESSAGES PANEL
+══════════════════════════ -->
+<section class="panel" id="panel-msg">
+
+  <div class="sec">Quick Contact</div>
+  <!--
+    SWAP CONTACTS: Replace initials, names, via labels, and href values.
+    iMessage deeplink:   sms:+1XXXXXXXXXX
+    WhatsApp deeplink:   https://wa.me/1XXXXXXXXXX
+    Telegram deeplink:   tg://resolve?phone=+1XXXXXXXXXX
+    FaceTime deeplink:   facetime:+1XXXXXXXXXX
+  -->
+  <a class="crow" href="sms:" target="_blank">
+    <div class="cavatar">—</div>
+    <div class="cinfo"><div class="cn">Add Contact</div><div class="cv">iMessage</div></div>
+    <span class="cact">Text ›</span>
+  </a>
+  <a class="crow" href="sms:" target="_blank">
+    <div class="cavatar">—</div>
+    <div class="cinfo"><div class="cn">Add Contact</div><div class="cv">iMessage</div></div>
+    <span class="cact">Text ›</span>
+  </a>
+  <a class="crow" href="sms:" target="_blank">
+    <div class="cavatar">—</div>
+    <div class="cinfo"><div class="cn">Add Contact</div><div class="cv">iMessage</div></div>
+    <span class="cact">Text ›</span>
+  </a>
+
+  <div class="sec">Apps</div>
+  <!-- SWAP: Replace with your actual contact deeplinks per app -->
+  <a class="row" href="https://web.whatsapp.com" target="_blank">
+    <div class="icon">💬</div>
+    <div class="rl"><div class="rl-t">WhatsApp</div><div class="rl-s">Open chats</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://t.me" target="_blank">
+    <div class="icon">✈</div>
+    <div class="rl"><div class="rl-t">Telegram</div><div class="rl-s">Open chats</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://signal.me" target="_blank">
+    <div class="icon">🔒</div>
+    <div class="rl"><div class="rl-t">Signal</div><div class="rl-s">Private messages</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://discord.com/channels/@me" target="_blank">
+    <div class="icon">🎮</div>
+    <div class="rl"><div class="rl-t">Discord</div><div class="rl-s">DMs &amp; servers</div></div>
+    <span class="chev">›</span>
+  </a>
+
+  <div class="tray" id="tray-msg">
+    <div class="trayhd" onclick="toggleTray('tray-msg')">
+      More
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+        <path d="M1.5 3.5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="traybody">
+      <a class="row" href="mailto:" target="_blank">
+        <div class="icon">✉</div>
+        <div class="rl"><div class="rl-t">Mail</div><div class="rl-s">Open mail app</div></div>
+        <span class="chev">›</span>
+      </a>
+      <a class="row" href="https://mail.google.com" target="_blank">
+        <div class="icon">📧</div>
+        <div class="rl"><div class="rl-t">Gmail</div></div>
+        <span class="chev">›</span>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════
+     CAPTURE PANEL
+══════════════════════════ -->
+<section class="panel" id="panel-cap">
+
+  <div class="capwrap">
+    <textarea
+      class="capbox"
+      id="cap-input"
+      placeholder="Speak or type a thought…"
+      rows="5"
+      autocorrect="on"
+      autocapitalize="sentences"
+    ></textarea>
+    <div class="capbtns">
+      <button class="btn btn-pri" onclick="saveNote()">Save</button>
+      <button class="btn btn-ghost" onclick="clearCap()">Clear</button>
+      <button class="btn btn-voice btn-ghost" id="voice-btn" onclick="toggleVoice()">🎤 Dictate</button>
+    </div>
+  </div>
+
+  <div class="sec">Saved</div>
+  <div id="notes-list"></div>
+
+</section>
+
+</main>
+
+<script>
+// ── CLOCK ──────────────────────────────────────
+function tick(){
+  const n=new Date();
+  const h=String(n.getHours()).padStart(2,'0');
+  const m=String(n.getMinutes()).padStart(2,'0');
+  const ts=h+':'+m;
+  const ds=n.toLocaleDateString('en-CA',{weekday:'short',month:'short',day:'numeric'}).toUpperCase();
+  document.getElementById('s-time').textContent=ts;
+  document.getElementById('s-date').textContent=ds;
+  document.getElementById('d-time').textContent=ts;
+  document.getElementById('d-date').textContent=ds;
+}
+tick();setInterval(tick,15000);
+
+// ── WEATHER (optional) ─────────────────────────
+// SWAP: Replace with your OpenWeatherMap or WeatherAPI key + coordinates
+// Example fetch endpoint:
+//   https://api.openweathermap.org/data/2.5/weather?lat=LAT&lon=LON&units=metric&appid=YOUR_KEY
+// Uncomment and fill in to enable:
+/*
+async function loadWeather(){
+  try{
+    const r=await fetch('YOUR_WEATHER_API_URL');
+    const d=await r.json();
+    const temp=Math.round(d.main.temp)+'°C';
+    const cond=d.weather[0].main;
+    document.getElementById('s-weather').textContent=temp;
+    document.getElementById('d-weather').textContent=temp+' · '+cond;
+  }catch(e){}
+}
+loadWeather();
+*/
+
+// ── PANEL SWITCHING ────────────────────────────
+function switchPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.modebt').forEach(b=>b.classList.remove('on'));
+  document.getElementById('panel-'+id).classList.add('on');
+  document.querySelector('[data-p="'+id+'"]').classList.add('on');
+}
+document.querySelectorAll('.modebt').forEach(btn=>{
+  btn.addEventListener('click',()=>switchPanel(btn.dataset.p));
+});
+
+// ── INNER TABS ─────────────────────────────────
+document.querySelectorAll('.itab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.itab').forEach(t=>t.classList.remove('on'));
+    tab.classList.add('on');
+    document.getElementById('sub-news').style.display=tab.dataset.sub==='news'?'block':'none';
+    document.getElementById('sub-sports').style.display=tab.dataset.sub==='sports'?'block':'none';
+  });
+});
+
+// ── TEAM FILTER ────────────────────────────────
+let activeTeam='all';
+document.querySelectorAll('.tchip').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.tchip').forEach(x=>x.classList.remove('on'));
+    c.classList.add('on');
+    activeTeam=c.dataset.team;
+    renderSports();
+  });
+});
+
+// ── NEWS DATA ──────────────────────────────────
+// SWAP: Replace this array with a fetched/parsed RSS feed.
+// Each item: { hl, src, age, url }
+const NEWS=[
+  {hl:'Federal budget passes third reading amid housing and infrastructure debate',src:'CBC',age:'8m',url:'https://cbc.ca'},
+  {hl:'Bank of Canada holds rates steady, signals cautious outlook through year-end',src:'Globe & Mail',age:'31m',url:'https://theglobeandmail.com'},
+  {hl:'Vancouver home sales edge higher but prices remain below year-ago levels',src:'Vancouver Sun',age:'1h',url:'https://vancouversun.com'},
+  {hl:'Trans Mountain pipeline expansion reaches full operational capacity',src:'CBC BC',age:'2h',url:'https://cbc.ca/bc'},
+  {hl:'US-Canada trade framework talks advance; auto sector exemptions near deal',src:'Reuters',age:'3h',url:'https://reuters.com'},
+  {hl:'Pacific Northwest drought conditions worsen as June heat ridge builds',src:'Seattle Times',age:'4h',url:'https://seattletimes.com'},
+  {hl:'AI hiring surge slows as enterprise budgets reset for second half of year',src:'The Verge',age:'5h',url:'https://theverge.com'},
+];
+
+// ── SPORTS DATA ────────────────────────────────
+// SWAP: Replace with live data from ESPN, Sportsnet, TheSportsDB, or similar.
+// type: 'score' | 'news'
+// For scores: home, teamScore, oppScore, opponent, status
+// team slug must match data-team chip values
+const SPORTS=[
+  {team:'canucks',type:'score',opponent:'Oilers',home:true,teamScore:3,oppScore:2,status:'Final · OT',live:false},
+  {team:'canucks',type:'news',hl:'Hughes named to All-Star roster; Demko cleared from IR ahead of playoffs',src:'Sportsnet',age:'1h',url:'https://sportsnet.ca'},
+  {team:'canucks',type:'news',hl:'Boeser extension talks ongoing as team weighs cap flexibility heading into offseason',src:'The Athletic',age:'4h',url:'https://theathletic.com'},
+  {team:'seahawks',type:'news',hl:'Seahawks sign veteran DL ahead of training camp; secondary depth also addressed',src:'ESPN',age:'2h',url:'https://espn.com'},
+  {team:'seahawks',type:'news',hl:"Geno Smith contract talks stall; team exploring 2026 QB options in draft",src:'The Athletic',age:'6h',url:'https://theathletic.com'},
+  {team:'bclions',type:'news',hl:'BC Lions open training camp with 12 roster additions; Maier takes first-team reps',src:'CFL.ca',age:'1h',url:'https://cfl.ca'},
+  {team:'bclions',type:'news',hl:'CFL schedule released: Lions open season at home against Calgary on June 14',src:'CBC BC',age:'5h',url:'https://cbc.ca/bc'},
+  {team:'bluejays',type:'score',opponent:'Red Sox',home:false,teamScore:6,oppScore:4,status:'Final',live:false},
+  {team:'bluejays',type:'news',hl:'Vladdy Jr. homer streak reaches 7 games; on pace for career-best home run total',src:'Sportsnet',age:'3h',url:'https://sportsnet.ca'},
+  {team:'raptors',type:'news',hl:'Raptors hold pre-draft workouts; five prospects visit OVO Athletic Centre',src:'TSN',age:'4h',url:'https://tsn.ca'},
+  {team:'raptors',type:'news',hl:"Ujiri on rebuild timeline: 'We are building something sustainable and patient'",src:'Globe & Mail',age:'7h',url:'https://theglobeandmail.com'},
+];
+
+// Team short names for score display
+const TNAMES={canucks:'VAN',seahawks:'SEA',bclions:'BC',bluejays:'TOR',raptors:'TOR'};
+
+function renderNews(){
+  document.getElementById('news-list').innerHTML=NEWS.map(n=>`
+    <a class="hl" href="${n.url}" target="_blank">
+      <div class="hl-t">${n.hl}</div>
+      <div class="hl-m"><span class="src-tag">${n.src}</span><span>·</span><span>${n.age} ago</span></div>
+    </a>
+  `).join('');
+}
+
+function renderSports(){
+  const items=activeTeam==='all'?SPORTS:SPORTS.filter(s=>s.team===activeTeam);
+  if(!items.length){
+    document.getElementById('sports-list').innerHTML='<div class="empty">No recent updates</div>';
+    return;
+  }
+  document.getElementById('sports-list').innerHTML=items.map(s=>{
+    if(s.type==='score'){
+      const tn=TNAMES[s.team]||s.team.toUpperCase().slice(0,3);
+      const opp=s.opponent.slice(0,3).toUpperCase();
+      const livePip=s.live?`<span class="live-dot" style="margin-left:4px"></span>`:'';
+      return `<div class="scard">
+        <div class="scard-hd">${s.status}${livePip}</div>
+        <div class="steams">
+          <div class="steam"><div class="steam-n">${tn}</div><div class="steam-s">${s.teamScore}</div></div>
+          <div class="sdash">—</div>
+          <div class="steam"><div class="steam-n">${opp}</div><div class="steam-s">${s.oppScore}</div></div>
+        </div>
+      </div>`;
+    }
+    return `<a class="hl" href="${s.url||'#'}" target="_blank">
+      <div class="hl-t">${s.hl}</div>
+      <div class="hl-m"><span class="src-tag">${s.src||''}</span><span>·</span><span>${s.age} ago</span></div>
+    </a>`;
+  }).join('');
+}
+
+renderNews();renderSports();
+
+// ── TRAY ───────────────────────────────────────
+function toggleTray(id){document.getElementById(id).classList.toggle('open')}
+
+// ── NOTES ──────────────────────────────────────
+let notes=[];
+try{notes=JSON.parse(localStorage.getItem('dash_notes')||'[]')}catch(e){}
+
+function renderNotes(){
+  const el=document.getElementById('notes-list');
+  if(!notes.length){el.innerHTML='<div class="empty">No saved notes</div>';return}
+  el.innerHTML=[...notes].reverse().map((n,ri)=>{
+    const i=notes.length-1-ri;
+    return `<div class="noterow">
+      <span class="note-time">${n.t}</span>
+      <span class="note-text">${escHtml(n.text)}</span>
+      <button class="note-del" onclick="delNote(${i})" aria-label="Delete note">×</button>
+    </div>`;
+  }).join('');
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function saveNote(){
+  const el=document.getElementById('cap-input');
+  const text=el.value.trim();
+  if(!text)return;
+  const now=new Date();
+  const t=now.toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit'});
+  notes.push({text,t});
+  try{localStorage.setItem('dash_notes',JSON.stringify(notes))}catch(e){}
+  el.value='';
+  renderNotes();
+}
+
+function clearCap(){document.getElementById('cap-input').value=''}
+
+function delNote(i){
+  notes.splice(i,1);
+  try{localStorage.setItem('dash_notes',JSON.stringify(notes))}catch(e){}
+  renderNotes();
+}
+
+document.getElementById('cap-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){saveNote()}
+});
+
+renderNotes();
+
+// ── VOICE DICTATION ────────────────────────────
+let rec=null,isRec=false;
+function toggleVoice(){
+  const btn=document.getElementById('voice-btn');
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){alert('Speech recognition unavailable. Try Chrome or the Tesla browser with microphone access.');return}
+  if(isRec){
+    rec&&rec.stop();
+    return;
+  }
+  rec=new SR();
+  rec.continuous=true;
+  rec.interimResults=true;
+  rec.lang='en-CA';
+  let base=document.getElementById('cap-input').value;
+  rec.onresult=function(e){
+    let fin='',int='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      if(e.results[i].isFinal)fin+=e.results[i][0].transcript;
+      else int+=e.results[i][0].transcript;
+    }
+    base+=fin;
+    document.getElementById('cap-input').value=base+int;
+  };
+  rec.onend=function(){
+    isRec=false;
+    btn.textContent='🎤 Dictate';
+    btn.classList.remove('rec');
+  };
+  rec.onerror=function(){
+    isRec=false;
+    btn.textContent='🎤 Dictate';
+    btn.classList.remove('rec');
+  };
+  rec.start();
+  isRec=true;
+  btn.textContent='⏹ Stop';
+  btn.classList.add('rec');
+}
+</script>
+</body>
+</html>
