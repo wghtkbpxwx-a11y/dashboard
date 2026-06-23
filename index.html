@@ -53,13 +53,13 @@ button{font-family:var(--f);cursor:pointer}
   backdrop-filter:blur(20px);
 }
 #s-left{display:flex;flex-direction:column;gap:2px}
-#s-time{font-size:22px;font-weight:300;letter-spacing:-0.6px;line-height:1}
-#s-date{font-size:10px;letter-spacing:0.8px;text-transform:uppercase;color:var(--t3)}
+#s-time{font-size:28px;font-weight:300;letter-spacing:-0.6px;line-height:1}
+#s-date{font-size:13px;letter-spacing:0.8px;text-transform:uppercase;color:var(--t3)}
 #s-right{display:flex;gap:14px;align-items:center}
-.s-chip{font-size:11px;color:var(--t2);letter-spacing:0.2px}
+.s-chip{font-size:14px;color:var(--t2);letter-spacing:0.2px}
 .s-chip.live{color:var(--accent);display:flex;align-items:center;gap:5px}
 .live-dot{
-  width:5px;height:5px;border-radius:50%;
+  width:6px;height:6px;border-radius:50%;
   background:var(--accent);
   animation:blink 2.4s infinite;
 }
@@ -74,19 +74,19 @@ button{font-family:var(--f);cursor:pointer}
   scrollbar-width:none;
   border-bottom:1px solid var(--line);
   position:sticky;
-  top:57px;
+  top:62px;
   z-index:199;
   background:var(--bg);
 }
 #modenav::-webkit-scrollbar{display:none}
 .modebt{
   flex-shrink:0;
-  padding:6px 14px;
+  padding:8px 18px;
   border-radius:20px;
   border:none;
   background:transparent;
   color:var(--t3);
-  font-size:11px;
+  font-size:14px;
   font-weight:500;
   letter-spacing:0.5px;
   text-transform:uppercase;
@@ -104,7 +104,7 @@ button{font-family:var(--f);cursor:pointer}
 /* ── SHARED COMPONENTS ── */
 .sec{
   padding:18px 20px 7px;
-  font-size:9.5px;
+  font-size:12px;
   font-weight:600;
   letter-spacing:1.1px;
   text-transform:uppercase;
@@ -113,25 +113,25 @@ button{font-family:var(--f);cursor:pointer}
 .row{
   display:flex;
   align-items:center;
-  padding:13px 20px;
+  padding:15px 20px;
   border-bottom:1px solid var(--line);
-  gap:13px;
+  gap:14px;
   cursor:pointer;
   transition:background .14s;
   color:inherit;
 }
 .row:hover,.row:active{background:var(--bg2)}
 .icon{
-  width:36px;height:36px;border-radius:var(--rs);
+  width:40px;height:40px;border-radius:var(--rs);
   background:var(--bg3);
   display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:15px;
+  flex-shrink:0;font-size:17px;
 }
 .icon.accent{background:var(--accent-bg);border:1px solid var(--accent-b)}
 .rl{flex:1;min-width:0}
-.rl-t{font-size:14px;font-weight:400;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rl-s{font-size:11px;color:var(--t3);margin-top:2px}
-.chev{color:var(--t3);font-size:14px;line-height:1;flex-shrink:0}
+.rl-t{font-size:17px;font-weight:400;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rl-s{font-size:13px;color:var(--t3);margin-top:2px}
+.chev{color:var(--t3);font-size:17px;line-height:1;flex-shrink:0}
 
 /* ── INNER TABS ── */
 .itabs{
@@ -141,9 +141,9 @@ button{font-family:var(--f);cursor:pointer}
   gap:0;
 }
 .itab{
-  padding:13px 0;
-  margin-right:22px;
-  font-size:12.5px;
+  padding:14px 0;
+  margin-right:24px;
+  font-size:15px;
   font-weight:500;
   color:var(--t3);
   cursor:pointer;
@@ -155,33 +155,33 @@ button{font-family:var(--f);cursor:pointer}
 
 /* ── NEWS HEADLINES ── */
 .hl{
-  padding:13px 20px;
+  padding:14px 20px;
   border-bottom:1px solid var(--line);
   cursor:pointer;
   transition:background .14s;
   display:block;
 }
 .hl:hover,.hl:active{background:var(--bg2)}
-.hl-t{font-size:13.5px;line-height:1.42;color:var(--t1);font-weight:400}
-.hl-m{font-size:10.5px;color:var(--t3);margin-top:4px;display:flex;gap:6px}
+.hl-t{font-size:16px;line-height:1.42;color:var(--t1);font-weight:400}
+.hl-m{font-size:13px;color:var(--t3);margin-top:5px;display:flex;gap:6px}
 .src-tag{color:var(--t2)}
 
 /* ── TEAM CHIPS ── */
 .teamfilter{
   display:flex;gap:7px;
-  padding:11px 16px;
+  padding:12px 16px;
   overflow-x:auto;scrollbar-width:none;
   border-bottom:1px solid var(--line);
 }
 .teamfilter::-webkit-scrollbar{display:none}
 .tchip{
   flex-shrink:0;
-  padding:5px 12px;
+  padding:6px 14px;
   border-radius:16px;
   border:1px solid var(--line2);
   background:transparent;
   color:var(--t2);
-  font-size:10.5px;
+  font-size:13px;
   font-weight:500;
   letter-spacing:0.3px;
   transition:all .18s;
@@ -194,79 +194,47 @@ button{font-family:var(--f);cursor:pointer}
 
 /* ── SCORE CARD ── */
 .scard{
-  margin:11px 16px;
-  padding:14px 18px;
+  margin:12px 16px;
+  padding:16px 18px;
   background:var(--bg2);
   border:1px solid var(--line2);
   border-radius:var(--r);
 }
 .scard-hd{
-  font-size:9.5px;text-transform:uppercase;letter-spacing:0.9px;
+  font-size:12px;text-transform:uppercase;letter-spacing:0.9px;
   color:var(--t3);margin-bottom:10px;display:flex;align-items:center;gap:7px;
 }
 .steams{display:flex;align-items:center;justify-content:space-between}
 .steam{text-align:center;flex:1}
-.steam-n{font-size:12px;font-weight:500;color:var(--t2);letter-spacing:0.3px}
-.steam-s{font-size:30px;font-weight:200;letter-spacing:-1.5px;color:var(--t1);line-height:1.1}
-.sdash{font-size:13px;color:var(--t3);padding:0 10px}
-
-/* ── NAV GRID ── */
-.ngrid{
-  display:grid;grid-template-columns:1fr 1fr;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  gap:1px;background:var(--line);
-}
-.ntile{
-  background:var(--bg);padding:15px 16px;
-  cursor:pointer;transition:background .14s;display:block;
-}
-.ntile:hover,.ntile:active{background:var(--bg2)}
-.ntile-ic{font-size:20px;margin-bottom:5px}
-.ntile-l{font-size:13px;color:var(--t1)}
-.ntile-a{font-size:10.5px;color:var(--t3);margin-top:2px}
-
-/* ── DRIVE BANNER ── */
-.drivebanner{
-  padding:20px;
-  border-bottom:1px solid var(--line);
-  display:flex;align-items:flex-end;justify-content:space-between;
-}
-.db-l{}
-.db-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:4px}
-.db-time{font-size:36px;font-weight:200;letter-spacing:-2px;color:var(--t1);line-height:1}
-.db-date{font-size:11px;color:var(--t3);margin-top:3px}
-.db-r{
-  text-align:right;
-}
-.db-r-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:0.8px;color:var(--t3);margin-bottom:3px}
-.db-r-val{font-size:13px;color:var(--t2)}
+.steam-n{font-size:15px;font-weight:500;color:var(--t2);letter-spacing:0.3px}
+.steam-s{font-size:38px;font-weight:200;letter-spacing:-1.5px;color:var(--t1);line-height:1.1}
+.sdash{font-size:14px;color:var(--t3);padding:0 10px}
 
 /* ── CONTACTS ── */
 .crow{
   display:flex;align-items:center;
-  padding:12px 20px;border-bottom:1px solid var(--line);
-  gap:13px;cursor:pointer;transition:background .14s;
+  padding:14px 20px;border-bottom:1px solid var(--line);
+  gap:14px;cursor:pointer;transition:background .14s;
 }
 .crow:hover,.crow:active{background:var(--bg2)}
 .cavatar{
-  width:38px;height:38px;border-radius:50%;
+  width:42px;height:42px;border-radius:50%;
   background:var(--bg4);
   display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:500;color:var(--t2);
+  font-size:14px;font-weight:500;color:var(--t2);
   flex-shrink:0;border:1px solid var(--line2);
 }
 .cinfo{flex:1;min-width:0}
-.cn{font-size:14px;color:var(--t1)}
-.cv{font-size:10.5px;color:var(--t3);margin-top:2px}
-.cact{font-size:11px;color:var(--accent);flex-shrink:0}
+.cn{font-size:17px;color:var(--t1)}
+.cv{font-size:13px;color:var(--t3);margin-top:2px}
+.cact{font-size:14px;color:var(--accent);flex-shrink:0}
 
 /* ── TRAY ── */
 .tray{border-top:1px solid var(--line)}
 .trayhd{
   display:flex;align-items:center;justify-content:space-between;
-  padding:13px 20px;cursor:pointer;
-  font-size:11px;font-weight:500;letter-spacing:0.4px;color:var(--t3);
+  padding:14px 20px;cursor:pointer;
+  font-size:14px;font-weight:500;letter-spacing:0.4px;color:var(--t3);
   transition:color .15s;
 }
 .trayhd:hover{color:var(--t2)}
@@ -276,7 +244,7 @@ button{font-family:var(--f);cursor:pointer}
 .tray.open .traybody{display:block}
 
 /* ── CAPTURE ── */
-.capwrap{padding:15px}
+.capwrap{padding:16px}
 .capbox{
   width:100%;
   background:var(--bg2);
@@ -284,20 +252,20 @@ button{font-family:var(--f);cursor:pointer}
   border-radius:var(--r);
   color:var(--t1);
   font-family:var(--f);
-  font-size:14px;
+  font-size:17px;
   line-height:1.5;
-  padding:13px 14px;
-  min-height:120px;
+  padding:14px 16px;
+  min-height:130px;
   resize:none;
   outline:none;
   transition:border-color .2s;
 }
 .capbox:focus{border-color:var(--accent)}
 .capbox::placeholder{color:var(--t3)}
-.capbtns{display:flex;gap:8px;margin-top:9px}
+.capbtns{display:flex;gap:8px;margin-top:10px}
 .btn{
-  padding:9px 16px;border-radius:var(--rs);
-  border:none;font-size:12px;font-weight:500;
+  padding:11px 18px;border-radius:var(--rs);
+  border:none;font-size:15px;font-weight:500;
   transition:opacity .15s,background .15s;
 }
 .btn-pri{background:var(--accent);color:#fff}
@@ -319,32 +287,24 @@ button{font-family:var(--f);cursor:pointer}
 /* ── NOTES LIST ── */
 .noterow{
   display:flex;align-items:flex-start;
-  padding:11px 20px;border-bottom:1px solid var(--line);
+  padding:13px 20px;border-bottom:1px solid var(--line);
   gap:10px;
 }
-.note-time{font-size:9.5px;color:var(--t3);flex-shrink:0;padding-top:2px;letter-spacing:0.3px}
-.note-text{flex:1;font-size:12.5px;color:var(--t2);line-height:1.45}
+.note-time{font-size:12px;color:var(--t3);flex-shrink:0;padding-top:2px;letter-spacing:0.3px}
+.note-text{flex:1;font-size:15px;color:var(--t2);line-height:1.45}
 .note-del{
   background:none;border:none;
-  color:var(--t3);font-size:16px;line-height:1;
+  color:var(--t3);font-size:18px;line-height:1;
   flex-shrink:0;padding:0;cursor:pointer;
   transition:color .15s;
 }
 .note-del:hover{color:var(--red)}
 
-/* ── WEATHER BANNER (drive) ── */
-.wstrip{
-  display:flex;align-items:center;gap:18px;
-  padding:10px 20px;border-bottom:1px solid var(--line);
-  font-size:11px;color:var(--t3);
-}
-.wstrip span{display:flex;align-items:center;gap:5px}
-
 /* ── DIVIDER ── */
 .divider{height:1px;background:var(--line);margin:4px 0}
 
 /* ── EMPTY ── */
-.empty{padding:20px;font-size:12px;color:var(--t3);text-align:center}
+.empty{padding:22px;font-size:14px;color:var(--t3);text-align:center}
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:3px;height:3px}
@@ -368,9 +328,7 @@ button{font-family:var(--f);cursor:pointer}
 
 <!-- ══ MODE NAV ══ -->
 <nav id="modenav">
-  <button class="modebt on" data-p="drive">Drive</button>
-  <button class="modebt" data-p="live">Live</button>
-  <button class="modebt" data-p="media">Media</button>
+  <button class="modebt on" data-p="live">Live</button>
   <button class="modebt" data-p="msg">Messages</button>
   <button class="modebt" data-p="cap">Capture</button>
 </nav>
@@ -378,103 +336,9 @@ button{font-family:var(--f);cursor:pointer}
 <main id="content">
 
 <!-- ══════════════════════════
-     DRIVE PANEL
-══════════════════════════ -->
-<section class="panel on" id="panel-drive">
-
-  <div class="drivebanner">
-    <div class="db-l">
-      <div class="db-lbl">Now</div>
-      <div class="db-time" id="d-time">--:--</div>
-      <div class="db-date" id="d-date">———</div>
-    </div>
-    <div class="db-r">
-      <div class="db-r-lbl">Conditions</div>
-      <div class="db-r-val" id="d-weather">—</div>
-    </div>
-  </div>
-
-  <div class="sec">Navigation</div>
-  <div class="ngrid">
-    <!--
-      SWAP THESE: Replace href values with your actual addresses.
-      Apple Maps deeplinks: maps.apple.com/?daddr=ADDRESS
-      Google Maps: maps.google.com/?q=ADDRESS
-    -->
-    <a class="ntile" href="maps.apple.com/?daddr=Home" target="_blank">
-      <div class="ntile-ic">🏠</div>
-      <div class="ntile-l">Home</div>
-      <div class="ntile-a">Set your home address</div>
-    </a>
-    <a class="ntile" href="maps.apple.com/?daddr=Work" target="_blank">
-      <div class="ntile-ic">📍</div>
-      <div class="ntile-l">Frequent</div>
-      <div class="ntile-a">Set a saved place</div>
-    </a>
-    <a class="ntile" href="maps.apple.com/?q=Supercharger+near+me" target="_blank">
-      <div class="ntile-ic">⚡</div>
-      <div class="ntile-l">Charging</div>
-      <div class="ntile-a">Nearest Supercharger</div>
-    </a>
-    <a class="ntile" href="maps.apple.com/" target="_blank">
-      <div class="ntile-ic">🗺</div>
-      <div class="ntile-l">Explore</div>
-      <div class="ntile-a">Open Maps</div>
-    </a>
-  </div>
-
-  <div class="sec">Media</div>
-  <!-- SWAP: Update hrefs and labels to match your preferred services -->
-  <a class="row" href="https://music.apple.com" target="_blank">
-    <div class="icon">🎵</div>
-    <div class="rl">
-      <div class="rl-t">Apple Music</div>
-      <div class="rl-s">Continue listening</div>
-    </div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://open.spotify.com" target="_blank">
-    <div class="icon">🎧</div>
-    <div class="rl">
-      <div class="rl-t">Spotify</div>
-      <div class="rl-s">Playlists &amp; podcasts</div>
-    </div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://podcasts.apple.com" target="_blank">
-    <div class="icon">🎙</div>
-    <div class="rl">
-      <div class="rl-t">Podcasts</div>
-      <div class="rl-s">Continue episode</div>
-    </div>
-    <span class="chev">›</span>
-  </a>
-
-  <div class="sec">Quick Actions</div>
-  <a class="row" href="sms:" target="_blank">
-    <div class="icon accent">💬</div>
-    <div class="rl">
-      <div class="rl-t">Messages</div>
-      <div class="rl-s">Open iMessage</div>
-    </div>
-    <span class="chev">›</span>
-  </a>
-  <!-- SWAP: Replace with your garage, gate, or shortcut app deeplinks -->
-  <a class="row" href="#" onclick="switchPanel('cap');return false">
-    <div class="icon accent">📝</div>
-    <div class="rl">
-      <div class="rl-t">Quick Note</div>
-      <div class="rl-s">Capture a thought</div>
-    </div>
-    <span class="chev">›</span>
-  </a>
-
-</section>
-
-<!-- ══════════════════════════
      LIVE PANEL (NEWS + SPORTS)
 ══════════════════════════ -->
-<section class="panel" id="panel-live">
+<section class="panel on" id="panel-live">
 
   <div class="itabs">
     <div class="itab on" data-sub="news">News</div>
@@ -483,15 +347,14 @@ button{font-family:var(--f);cursor:pointer}
 
   <!-- News sub-panel -->
   <div id="sub-news">
-    <div style="padding:10px 20px 2px;display:flex;align-items:center;gap:7px">
+    <div style="padding:11px 20px 3px;display:flex;align-items:center;gap:7px">
       <span class="live-dot"></span>
-      <span style="font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">Headlines</span>
+      <span style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">Headlines</span>
     </div>
     <div id="news-list"></div>
     <!--
       SWAP FEEDS: Replace NEWS array in JS below with fetched data.
       Recommended sources: CBC RSS, Globe & Mail, Reuters, AP News.
-      Use a CORS proxy or a backend endpoint if fetching RSS in-browser.
     -->
   </div>
 
@@ -508,100 +371,7 @@ button{font-family:var(--f);cursor:pointer}
     <div id="sports-list"></div>
     <!--
       SWAP SPORTS DATA: Replace SPORTS array in JS with live data.
-      Recommended: ESPN undocumented API, Sportsnet RSS, or a sports API like TheSportsDB.
-      Team slugs match the data-team attributes above.
     -->
-  </div>
-
-</section>
-
-<!-- ══════════════════════════
-     MEDIA PANEL
-══════════════════════════ -->
-<section class="panel" id="panel-media">
-
-  <div class="sec">Music</div>
-  <!-- SWAP: Update all hrefs to match your preferred services/playlists -->
-  <a class="row" href="https://music.apple.com" target="_blank">
-    <div class="icon">🍎</div>
-    <div class="rl"><div class="rl-t">Apple Music</div><div class="rl-s">Library, Radio, Stations</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://open.spotify.com" target="_blank">
-    <div class="icon">🎵</div>
-    <div class="rl"><div class="rl-t">Spotify</div><div class="rl-s">Discover Weekly, Playlists</div></div>
-    <span class="chev">›</span>
-  </a>
-
-  <div class="sec">Podcasts</div>
-  <a class="row" href="https://podcasts.apple.com" target="_blank">
-    <div class="icon">🎙</div>
-    <div class="rl"><div class="rl-t">Apple Podcasts</div><div class="rl-s">Continue listening</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://pocketcasts.com" target="_blank">
-    <div class="icon">🎚</div>
-    <div class="rl"><div class="rl-t">Pocket Casts</div><div class="rl-s">Up next queue</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://www.audible.com" target="_blank">
-    <div class="icon">📖</div>
-    <div class="rl"><div class="rl-t">Audible</div><div class="rl-s">Audiobooks</div></div>
-    <span class="chev">›</span>
-  </a>
-
-  <div class="sec">Video</div>
-  <a class="row" href="https://youtube.com" target="_blank">
-    <div class="icon">▶</div>
-    <div class="rl"><div class="rl-t">YouTube</div><div class="rl-s">Subscriptions &amp; feed</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://netflix.com" target="_blank">
-    <div class="icon">🎬</div>
-    <div class="rl"><div class="rl-t">Netflix</div><div class="rl-s">Continue watching</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://tv.apple.com" target="_blank">
-    <div class="icon">📺</div>
-    <div class="rl"><div class="rl-t">Apple TV+</div><div class="rl-s">Continue watching</div></div>
-    <span class="chev">›</span>
-  </a>
-
-  <div class="tray" id="tray-media">
-    <div class="trayhd" onclick="toggleTray('tray-media')">
-      More Services
-      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
-        <path d="M1.5 3.5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div class="traybody">
-      <!-- SWAP: Add/remove services as needed -->
-      <a class="row" href="https://disneyplus.com" target="_blank">
-        <div class="icon">✨</div>
-        <div class="rl"><div class="rl-t">Disney+</div></div>
-        <span class="chev">›</span>
-      </a>
-      <a class="row" href="https://primevideo.com" target="_blank">
-        <div class="icon">📦</div>
-        <div class="rl"><div class="rl-t">Prime Video</div></div>
-        <span class="chev">›</span>
-      </a>
-      <a class="row" href="https://crave.ca" target="_blank">
-        <div class="icon">🎭</div>
-        <div class="rl"><div class="rl-t">Crave</div><div class="rl-s">Canadian content</div></div>
-        <span class="chev">›</span>
-      </a>
-      <a class="row" href="https://sportsnet.ca" target="_blank">
-        <div class="icon">🏒</div>
-        <div class="rl"><div class="rl-t">Sportsnet</div><div class="rl-s">Live games &amp; highlights</div></div>
-        <span class="chev">›</span>
-      </a>
-      <a class="row" href="https://tsn.ca" target="_blank">
-        <div class="icon">🏈</div>
-        <div class="rl"><div class="rl-t">TSN</div><div class="rl-s">Live sports</div></div>
-        <span class="chev">›</span>
-      </a>
-    </div>
   </div>
 
 </section>
@@ -636,15 +406,19 @@ button{font-family:var(--f);cursor:pointer}
   </a>
 
   <div class="sec">Apps</div>
-  <!-- SWAP: Replace with your actual contact deeplinks per app -->
   <a class="row" href="https://web.whatsapp.com" target="_blank">
     <div class="icon">💬</div>
     <div class="rl"><div class="rl-t">WhatsApp</div><div class="rl-s">Open chats</div></div>
     <span class="chev">›</span>
   </a>
-  <a class="row" href="https://t.me" target="_blank">
+  <a class="row" href="https://web.telegram.org" target="_blank">
     <div class="icon">✈</div>
     <div class="rl"><div class="rl-t">Telegram</div><div class="rl-s">Open chats</div></div>
+    <span class="chev">›</span>
+  </a>
+  <a class="row" href="https://www.messenger.com" target="_blank">
+    <div class="icon">💙</div>
+    <div class="rl"><div class="rl-t">Messenger</div><div class="rl-s">Facebook Messenger</div></div>
     <span class="chev">›</span>
   </a>
   <a class="row" href="https://signal.me" target="_blank">
@@ -673,7 +447,7 @@ button{font-family:var(--f);cursor:pointer}
       </a>
       <a class="row" href="https://mail.google.com" target="_blank">
         <div class="icon">📧</div>
-        <div class="rl"><div class="rl-t">Gmail</div></div>
+        <div class="rl"><div class="rl-t">Gmail</div><div class="rl-s">Open inbox</div></div>
         <span class="chev">›</span>
       </a>
     </div>
@@ -719,16 +493,12 @@ function tick(){
   const ds=n.toLocaleDateString('en-CA',{weekday:'short',month:'short',day:'numeric'}).toUpperCase();
   document.getElementById('s-time').textContent=ts;
   document.getElementById('s-date').textContent=ds;
-  document.getElementById('d-time').textContent=ts;
-  document.getElementById('d-date').textContent=ds;
 }
 tick();setInterval(tick,15000);
 
 // ── WEATHER (optional) ─────────────────────────
 // SWAP: Replace with your OpenWeatherMap or WeatherAPI key + coordinates
-// Example fetch endpoint:
-//   https://api.openweathermap.org/data/2.5/weather?lat=LAT&lon=LON&units=metric&appid=YOUR_KEY
-// Uncomment and fill in to enable:
+// Example: https://api.openweathermap.org/data/2.5/weather?lat=LAT&lon=LON&units=metric&appid=YOUR_KEY
 /*
 async function loadWeather(){
   try{
@@ -736,8 +506,7 @@ async function loadWeather(){
     const d=await r.json();
     const temp=Math.round(d.main.temp)+'°C';
     const cond=d.weather[0].main;
-    document.getElementById('s-weather').textContent=temp;
-    document.getElementById('d-weather').textContent=temp+' · '+cond;
+    document.getElementById('s-weather').textContent=temp+' · '+cond;
   }catch(e){}
 }
 loadWeather();
@@ -791,8 +560,6 @@ const NEWS=[
 // ── SPORTS DATA ────────────────────────────────
 // SWAP: Replace with live data from ESPN, Sportsnet, TheSportsDB, or similar.
 // type: 'score' | 'news'
-// For scores: home, teamScore, oppScore, opponent, status
-// team slug must match data-team chip values
 const SPORTS=[
   {team:'canucks',type:'score',opponent:'Oilers',home:true,teamScore:3,oppScore:2,status:'Final · OT',live:false},
   {team:'canucks',type:'news',hl:'Hughes named to All-Star roster; Demko cleared from IR ahead of playoffs',src:'Sportsnet',age:'1h',url:'https://sportsnet.ca'},
@@ -807,7 +574,6 @@ const SPORTS=[
   {team:'raptors',type:'news',hl:"Ujiri on rebuild timeline: 'We are building something sustainable and patient'",src:'Globe & Mail',age:'7h',url:'https://theglobeandmail.com'},
 ];
 
-// Team short names for score display
 const TNAMES={canucks:'VAN',seahawks:'SEA',bclions:'BC',bluejays:'TOR',raptors:'TOR'};
 
 function renderNews(){
