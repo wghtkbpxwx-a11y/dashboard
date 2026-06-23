@@ -54,7 +54,7 @@ button{font-family:var(--f);cursor:pointer}
 }
 #s-left{display:flex;flex-direction:column;gap:2px}
 #s-time{font-size:32px;font-weight:300;letter-spacing:-0.6px;line-height:1}
-#s-date{font-size:14px;letter-spacing:0.8px;text-transform:uppercase;color:var(--t3)}
+#s-date{font-size:15px;letter-spacing:0.8px;text-transform:uppercase;color:var(--t2)}
 #s-right{display:flex;gap:14px;align-items:center}
 .s-chip{font-size:15px;color:var(--t2);letter-spacing:0.2px}
 .s-chip.live{color:var(--accent);display:flex;align-items:center;gap:5px}
@@ -81,18 +81,18 @@ button{font-family:var(--f);cursor:pointer}
 #modenav::-webkit-scrollbar{display:none}
 .modebt{
   flex-shrink:0;
-  padding:9px 20px;
-  border-radius:20px;
+  padding:11px 24px;
+  border-radius:22px;
   border:none;
   background:transparent;
   color:var(--t3);
-  font-size:16px;
+  font-size:17px;
   font-weight:500;
   letter-spacing:0.5px;
   text-transform:uppercase;
   transition:color .18s,background .18s;
 }
-.modebt.on{background:var(--bg4);color:var(--t1)}
+.modebt.on{background:var(--accent);color:#fff}
 .modebt:hover:not(.on){color:var(--t2)}
 
 /* ── PANELS ── */
@@ -113,25 +113,29 @@ button{font-family:var(--f);cursor:pointer}
 .row{
   display:flex;
   align-items:center;
-  padding:18px 20px;
+  padding:20px 22px;
   border-bottom:1px solid var(--line);
-  gap:16px;
+  gap:18px;
   cursor:pointer;
   transition:background .14s;
   color:inherit;
 }
 .row:hover,.row:active{background:var(--bg2)}
 .icon{
-  width:46px;height:46px;border-radius:11px;
+  width:54px;height:54px;border-radius:14px;
   background:var(--bg3);
   display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:21px;
+  flex-shrink:0;font-size:26px;
 }
 .icon.accent{background:var(--accent-bg);border:1px solid var(--accent-b)}
+.icon-wa{background:#20c65a;color:#fff;font-size:22px;font-weight:700}
+.icon-tg{background:#2aabee;color:#fff;font-size:22px;font-weight:700}
+.icon-ms{background:linear-gradient(135deg,#0082fb,#a239ca);color:#fff;font-size:22px;font-weight:700}
+.icon-gm{background:#ea4335;color:#fff;font-size:22px;font-weight:700}
 .rl{flex:1;min-width:0}
-.rl-t{font-size:19px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rl-s{font-size:14px;color:var(--t3);margin-top:3px}
-.chev{color:var(--t3);font-size:20px;line-height:1;flex-shrink:0}
+.rl-t{font-size:22px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rl-s{font-size:16px;color:var(--t2);margin-top:4px}
+.chev{color:var(--t3);font-size:22px;line-height:1;flex-shrink:0}
 
 /* ── INNER TABS ── */
 .itabs{
@@ -141,9 +145,9 @@ button{font-family:var(--f);cursor:pointer}
   gap:0;
 }
 .itab{
-  padding:16px 0;
-  margin-right:28px;
-  font-size:17px;
+  padding:18px 0;
+  margin-right:30px;
+  font-size:19px;
   font-weight:500;
   color:var(--t3);
   cursor:pointer;
@@ -155,15 +159,15 @@ button{font-family:var(--f);cursor:pointer}
 
 /* ── NEWS HEADLINES ── */
 .hl{
-  padding:16px 20px;
+  padding:18px 20px;
   border-bottom:1px solid var(--line);
   cursor:pointer;
   transition:background .14s;
   display:block;
 }
 .hl:hover,.hl:active{background:var(--bg2)}
-.hl-t{font-size:18px;line-height:1.45;color:var(--t1);font-weight:400}
-.hl-m{font-size:14px;color:var(--t3);margin-top:6px;display:flex;gap:6px}
+.hl-t{font-size:20px;line-height:1.45;color:var(--t1);font-weight:400}
+.hl-m{font-size:15px;color:var(--t3);margin-top:7px;display:flex;gap:6px}
 .src-tag{color:var(--t2)}
 
 /* ── TEAM CHIPS ── */
@@ -176,12 +180,12 @@ button{font-family:var(--f);cursor:pointer}
 .teamfilter::-webkit-scrollbar{display:none}
 .tchip{
   flex-shrink:0;
-  padding:8px 16px;
-  border-radius:16px;
+  padding:10px 18px;
+  border-radius:18px;
   border:1px solid var(--line2);
   background:transparent;
   color:var(--t2);
-  font-size:15px;
+  font-size:16px;
   font-weight:500;
   letter-spacing:0.3px;
   transition:all .18s;
@@ -207,7 +211,7 @@ button{font-family:var(--f);cursor:pointer}
 .steams{display:flex;align-items:center;justify-content:space-between}
 .steam{text-align:center;flex:1}
 .steam-n{font-size:16px;font-weight:500;color:var(--t2);letter-spacing:0.3px}
-.steam-s{font-size:44px;font-weight:200;letter-spacing:-1.5px;color:var(--t1);line-height:1.1}
+.steam-s{font-size:50px;font-weight:200;letter-spacing:-1.5px;color:var(--t1);line-height:1.1}
 .sdash{font-size:15px;color:var(--t3);padding:0 10px}
 
 /* ── CAPTURE ── */
@@ -219,7 +223,7 @@ button{font-family:var(--f);cursor:pointer}
   border-radius:var(--r);
   color:var(--t1);
   font-family:var(--f);
-  font-size:18px;
+  font-size:20px;
   line-height:1.5;
   padding:16px 18px;
   min-height:140px;
@@ -231,8 +235,8 @@ button{font-family:var(--f);cursor:pointer}
 .capbox::placeholder{color:var(--t3)}
 .capbtns{display:flex;gap:8px;margin-top:10px}
 .btn{
-  padding:13px 20px;border-radius:var(--rs);
-  border:none;font-size:16px;font-weight:500;
+  padding:15px 22px;border-radius:var(--rs);
+  border:none;font-size:17px;font-weight:500;
   transition:opacity .15s,background .15s;
 }
 .btn-pri{background:var(--accent);color:#fff}
@@ -350,24 +354,24 @@ button{font-family:var(--f);cursor:pointer}
 
   <div class="sec">Messaging</div>
   <a class="row" href="https://web.whatsapp.com" target="_blank">
-    <div class="icon">💬</div>
+    <div class="icon icon-wa">W</div>
     <div class="rl"><div class="rl-t">WhatsApp</div><div class="rl-s">Open chats</div></div>
     <span class="chev">›</span>
   </a>
   <a class="row" href="https://web.telegram.org" target="_blank">
-    <div class="icon">✈</div>
+    <div class="icon icon-tg">T</div>
     <div class="rl"><div class="rl-t">Telegram</div><div class="rl-s">Open chats</div></div>
     <span class="chev">›</span>
   </a>
   <a class="row" href="https://www.messenger.com" target="_blank">
-    <div class="icon">💙</div>
+    <div class="icon icon-ms">M</div>
     <div class="rl"><div class="rl-t">Messenger</div><div class="rl-s">Facebook Messenger</div></div>
     <span class="chev">›</span>
   </a>
 
   <div class="sec">Email</div>
   <a class="row" href="https://mail.google.com" target="_blank">
-    <div class="icon">📧</div>
+    <div class="icon icon-gm">G</div>
     <div class="rl"><div class="rl-t">Gmail</div><div class="rl-s">Open inbox</div></div>
     <span class="chev">›</span>
   </a>
