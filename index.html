@@ -30,7 +30,6 @@
 
 html{
   background:#04050a;
-  /* deep-space horizon glow */
   background-image:
     radial-gradient(120% 80% at 50% -10%, rgba(108,180,255,0.10), transparent 60%),
     radial-gradient(90% 60% at 85% 8%, rgba(120,90,220,0.08), transparent 55%),
@@ -38,7 +37,6 @@ html{
   background-attachment:fixed;
 }
 
-/* ── STARFIELD ── */
 #stars{
   position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:
@@ -73,7 +71,6 @@ body{
 a{color:inherit;text-decoration:none}
 button{font-family:var(--f);cursor:pointer}
 
-/* ── STATUS BAR ── */
 #status{
   display:flex;
   align-items:center;
@@ -111,7 +108,6 @@ button{font-family:var(--f);cursor:pointer}
 }
 @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 8px var(--glow)}55%{opacity:0.3;box-shadow:0 0 2px var(--glow)}}
 
-/* ── MODE NAV ── */
 #modenav{
   display:flex;
   gap:6px;
@@ -125,14 +121,14 @@ button{font-family:var(--f);cursor:pointer}
 }
 .modebt{
   flex:1;
-  padding:13px 18px;
+  padding:12px 10px;
   border-radius:100px;
   border:1px solid transparent;
   background:var(--surface);
   color:var(--t3);
-  font-size:14px;
+  font-size:12px;
   font-weight:600;
-  letter-spacing:1.4px;
+  letter-spacing:0.9px;
   text-transform:uppercase;
   transition:all .22s ease;
 }
@@ -144,13 +140,11 @@ button{font-family:var(--f);cursor:pointer}
 }
 .modebt:not(.on):active{background:var(--surface2)}
 
-/* ── PANELS ── */
 #content{padding:6px 16px env(safe-area-inset-bottom,28px)}
 .panel{display:none;animation:fadeIn .28s ease}
 .panel.on{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ── SECTION LABEL ── */
 .sec{
   padding:24px 8px 12px;
   font-size:11px;
@@ -162,7 +156,6 @@ button{font-family:var(--f);cursor:pointer}
 }
 .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
 
-/* ── APP ROWS (glass card group) ── */
 .cardgroup{
   background:var(--glass);
   border:1px solid var(--line);
@@ -183,7 +176,6 @@ button{font-family:var(--f);cursor:pointer}
 .row:last-child{border-bottom:none}
 .row:active{background:var(--surface2)}
 
-/* ── REAL APP ICONS ── */
 .appicon{
   width:52px;height:52px;
   border-radius:15px;
@@ -193,18 +185,20 @@ button{font-family:var(--f);cursor:pointer}
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.18);
 }
 .appicon svg{width:30px;height:30px;display:block}
-.ic-wa{background:linear-gradient(150deg,#2af34f 0%,#23c95c 45%,#0fa362 100%)}
-.ic-wa{box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(37,211,102,0.6)}
+.ic-wa{background:linear-gradient(150deg,#2af34f 0%,#23c95c 45%,#0fa362 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(37,211,102,0.6)}
 .ic-tg{background:linear-gradient(150deg,#3ec6ff 0%,#1d9bdf 60%,#0d83c4 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(45,171,238,0.6)}
 .ic-ms{background:linear-gradient(150deg,#00c6ff 0%,#0a7cff 42%,#9a3df0 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(98,103,255,0.6)}
 .ic-gm{background:linear-gradient(150deg,#ffffff,#f1f3f6);box-shadow:inset 0 1px 0 rgba(255,255,255,0.9),0 8px 22px -8px rgba(234,67,53,0.45)}
+.ic-notes{background:linear-gradient(150deg,#FFE434,#FFB800,#FF9500);box-shadow:inset 0 1px 0 rgba(255,255,255,0.35),0 8px 22px -8px rgba(255,180,0,0.65)}
+.ic-remind{background:linear-gradient(150deg,#FF8C7A,#FF453A,#D62C24);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(255,69,58,0.65)}
+.ic-drive{background:linear-gradient(150deg,#70D4FF,#1A9EFF,#0A7AFF);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(10,132,255,0.65)}
+.ic-photos{background:linear-gradient(135deg,#FF9500 0%,#FF2D55 40%,#BF5AF2 72%,#5856D6 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(191,90,242,0.55)}
 
 .rl{flex:1;min-width:0}
 .rl-t{font-size:19px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-0.2px}
 .rl-s{font-size:13px;color:var(--t3);margin-top:3px;letter-spacing:0.2px}
 .chev{color:var(--t3);font-size:22px;line-height:1;flex-shrink:0;font-weight:300}
 
-/* ── INNER TABS ── */
 .itabs{
   display:flex;
   gap:8px;
@@ -229,7 +223,6 @@ button{font-family:var(--f);cursor:pointer}
   box-shadow:0 0 18px -6px var(--glow);
 }
 
-/* ── NEWS HEADLINES ── */
 .hl{
   display:block;
   padding:16px 18px;
@@ -248,7 +241,6 @@ button{font-family:var(--f);cursor:pointer}
   font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--t3);font-weight:600;
 }
 
-/* ── TEAM CHIPS ── */
 .teamfilter{
   display:flex;gap:8px;
   padding:4px 2px 16px;
@@ -274,7 +266,6 @@ button{font-family:var(--f);cursor:pointer}
   box-shadow:0 0 16px -6px var(--glow);
 }
 
-/* ── SCORE CARD ── */
 .scard{
   margin-bottom:12px;
   padding:18px 20px;
@@ -298,7 +289,6 @@ button{font-family:var(--f);cursor:pointer}
 }
 .sdash{font-size:18px;color:var(--t3);padding:0 14px;font-weight:200}
 
-/* ── CAPTURE ── */
 .capbox{
   width:100%;
   background:var(--glass);
@@ -342,7 +332,6 @@ button{font-family:var(--f);cursor:pointer}
   box-shadow:0 0 20px -8px rgba(255,93,93,0.6);
 }
 
-/* ── NOTES LIST ── */
 .noterow{
   display:flex;align-items:flex-start;
   padding:15px 18px;border-bottom:1px solid var(--line);
@@ -359,10 +348,8 @@ button{font-family:var(--f);cursor:pointer}
 }
 .note-del:active{color:var(--red)}
 
-/* ── EMPTY ── */
 .empty{padding:32px;font-size:14px;color:var(--t3);text-align:center;letter-spacing:0.4px}
 
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:3px}
@@ -372,7 +359,6 @@ button{font-family:var(--f);cursor:pointer}
 
 <div id="stars"></div>
 
-<!-- ══ STATUS BAR ══ -->
 <header id="status">
   <div id="s-left">
     <div id="s-time">--:--</div>
@@ -383,36 +369,24 @@ button{font-family:var(--f);cursor:pointer}
   </div>
 </header>
 
-<!-- ══ MODE NAV ══ -->
 <nav id="modenav">
   <button class="modebt on" data-p="live">Live</button>
   <button class="modebt" data-p="msg">Messages</button>
+  <button class="modebt" data-p="apple">Apple</button>
   <button class="modebt" data-p="cap">Capture</button>
 </nav>
 
 <main id="content">
 
-<!-- ══════════════════════════
-     LIVE PANEL (NEWS + SPORTS)
-══════════════════════════ -->
 <section class="panel on" id="panel-live">
-
   <div class="itabs">
     <div class="itab on" data-sub="news">News</div>
     <div class="itab" data-sub="sports">Sports</div>
   </div>
-
-  <!-- News sub-panel -->
   <div id="sub-news">
     <div class="subhead"><span class="live-dot"></span>Headlines</div>
     <div class="cardgroup" id="news-list"></div>
-    <!--
-      SWAP FEEDS: Replace NEWS array in JS below with fetched data.
-      Recommended sources: CBC RSS, Globe & Mail, Reuters, AP News.
-    -->
   </div>
-
-  <!-- Sports sub-panel -->
   <div id="sub-sports" style="display:none">
     <div class="teamfilter">
       <button class="tchip on" data-team="all">All</button>
@@ -423,18 +397,10 @@ button{font-family:var(--f);cursor:pointer}
       <button class="tchip" data-team="raptors">Raptors</button>
     </div>
     <div id="sports-list"></div>
-    <!--
-      SWAP SPORTS DATA: Replace SPORTS array in JS with live data.
-    -->
   </div>
-
 </section>
 
-<!-- ══════════════════════════
-     MESSAGES PANEL
-══════════════════════════ -->
 <section class="panel" id="panel-msg">
-
   <div class="sec">Messaging</div>
   <div class="cardgroup">
     <a class="row" href="https://web.whatsapp.com" target="_blank">
@@ -459,7 +425,6 @@ button{font-family:var(--f);cursor:pointer}
       <span class="chev">›</span>
     </a>
   </div>
-
   <div class="sec">Email</div>
   <div class="cardgroup">
     <a class="row" href="https://mail.google.com" target="_blank">
@@ -470,14 +435,69 @@ button{font-family:var(--f);cursor:pointer}
       <span class="chev">›</span>
     </a>
   </div>
-
 </section>
 
-<!-- ══════════════════════════
-     CAPTURE PANEL
-══════════════════════════ -->
-<section class="panel" id="panel-cap">
+<section class="panel" id="panel-apple">
+  <div class="sec">Productivity</div>
+  <div class="cardgroup">
+    <a class="row" href="https://www.icloud.com/notes" target="_blank">
+      <div class="appicon ic-notes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.75)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="rgba(0,0,0,0.10)" stroke="rgba(0,0,0,0.55)"/>
+          <polyline points="14 2 14 8 20 8" stroke="rgba(0,0,0,0.55)"/>
+          <line x1="8" y1="13" x2="16" y2="13"/>
+          <line x1="8" y1="16.5" x2="14" y2="16.5"/>
+          <line x1="8" y1="10" x2="10" y2="10"/>
+        </svg>
+      </div>
+      <div class="rl"><div class="rl-t">Notes</div><div class="rl-s">iCloud Notes</div></div>
+      <span class="chev">›</span>
+    </a>
+    <a class="row" href="https://www.icloud.com/reminders" target="_blank">
+      <div class="appicon ic-remind">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="9" y1="6" x2="20" y2="6"/>
+          <line x1="9" y1="12" x2="20" y2="12"/>
+          <line x1="9" y1="18" x2="20" y2="18"/>
+          <circle cx="4.5" cy="6" r="1.5" fill="white" stroke="none"/>
+          <circle cx="4.5" cy="12" r="1.5" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1.5"/>
+          <circle cx="4.5" cy="18" r="1.5" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="rl"><div class="rl-t">Reminders</div><div class="rl-s">iCloud Reminders</div></div>
+      <span class="chev">›</span>
+    </a>
+  </div>
+  <div class="sec">Storage</div>
+  <div class="cardgroup">
+    <a class="row" href="https://www.icloud.com/iclouddrive" target="_blank">
+      <div class="appicon ic-drive">
+        <svg viewBox="0 0 24 24" fill="white">
+          <path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+        </svg>
+      </div>
+      <div class="rl"><div class="rl-t">Files</div><div class="rl-s">iCloud Drive</div></div>
+      <span class="chev">›</span>
+    </a>
+    <a class="row" href="https://www.icloud.com/photos" target="_blank">
+      <div class="appicon ic-photos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2.5" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.6)"/>
+          <circle cx="8.5" cy="8.5" r="1.8" fill="white" stroke="none"/>
+          <polyline points="3 16 8 11 12.5 15.5 15 13 21 18" stroke="white" stroke-width="1.8"/>
+        </svg>
+      </div>
+      <div class="rl"><div class="rl-t">Photos</div><div class="rl-s">iCloud Photos</div></div>
+      <span class="chev">›</span>
+    </a>
+  </div>
+  <div style="margin-top:20px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);display:flex;gap:10px;align-items:flex-start">
+    <span style="color:var(--accent);font-size:15px;flex-shrink:0;margin-top:1px">ⓘ</span>
+    <span style="font-size:13px;color:var(--t3);line-height:1.5;letter-spacing:0.2px">Apple blocks embedding iCloud in external pages. Tapping opens each service in the browser where you can sign in with your Apple ID.</span>
+  </div>
+</section>
 
+<section class="panel" id="panel-cap">
   <div class="sec">Capture</div>
   <textarea
     class="capbox"
@@ -492,28 +512,22 @@ button{font-family:var(--f);cursor:pointer}
     <button class="btn btn-ghost" onclick="clearCap()">Clear</button>
     <button class="btn btn-voice btn-ghost" id="voice-btn" onclick="toggleVoice()">🎤 Dictate</button>
   </div>
-
   <div class="sec">Saved</div>
   <div class="cardgroup" id="notes-list"></div>
-
 </section>
 
 </main>
 
 <script>
-// ── CLOCK ───────────────────────────────────
 function tick(){
   const n=new Date();
   const h=String(n.getHours()).padStart(2,'0');
   const m=String(n.getMinutes()).padStart(2,'0');
-  const ts=h+':'+m;
-  const ds=n.toLocaleDateString('en-CA',{weekday:'short',month:'short',day:'numeric'}).toUpperCase();
-  document.getElementById('s-time').textContent=ts;
-  document.getElementById('s-date').textContent=ds;
+  document.getElementById('s-time').textContent=h+':'+m;
+  document.getElementById('s-date').textContent=n.toLocaleDateString('en-CA',{weekday:'short',month:'short',day:'numeric'}).toUpperCase();
 }
 tick();setInterval(tick,15000);
 
-// ── PANEL SWITCHING ──────────────────────────────
 function switchPanel(id){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.modebt').forEach(b=>b.classList.remove('on'));
@@ -524,7 +538,6 @@ document.querySelectorAll('.modebt').forEach(btn=>{
   btn.addEventListener('click',()=>switchPanel(btn.dataset.p));
 });
 
-// ── INNER TABS ──────────────────────────────────
 document.querySelectorAll('.itab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.itab').forEach(t=>t.classList.remove('on'));
@@ -534,7 +547,6 @@ document.querySelectorAll('.itab').forEach(tab=>{
   });
 });
 
-// ── TEAM FILTER ─────────────────────────────────
 let activeTeam='all';
 document.querySelectorAll('.tchip').forEach(c=>{
   c.addEventListener('click',()=>{
@@ -545,9 +557,6 @@ document.querySelectorAll('.tchip').forEach(c=>{
   });
 });
 
-// ── NEWS DATA ──────────────────────────────────────
-// SWAP: Replace this array with a fetched/parsed RSS feed.
-// Each item: { hl, src, age, url }
 const NEWS=[
   {hl:'Federal budget passes third reading amid housing and infrastructure debate',src:'CBC',age:'8m',url:'https://cbc.ca'},
   {hl:'Bank of Canada holds rates steady, signals cautious outlook through year-end',src:'Globe & Mail',age:'31m',url:'https://theglobeandmail.com'},
@@ -558,9 +567,6 @@ const NEWS=[
   {hl:'AI hiring surge slows as enterprise budgets reset for second half of year',src:'The Verge',age:'5h',url:'https://theverge.com'},
 ];
 
-// ── SPORTS DATA ───────────────────────────────────────
-// SWAP: Replace with live data from ESPN, Sportsnet, TheSportsDB, or similar.
-// type: 'score' | 'news'
 const SPORTS=[
   {team:'canucks',type:'score',opponent:'Oilers',home:true,teamScore:3,oppScore:2,status:'Final · OT',live:false},
   {team:'canucks',type:'news',hl:'Hughes named to All-Star roster; Demko cleared from IR ahead of playoffs',src:'Sportsnet',age:'1h',url:'https://sportsnet.ca'},
@@ -588,61 +594,40 @@ function renderNews(){
 
 function renderSports(){
   const items=activeTeam==='all'?SPORTS:SPORTS.filter(s=>s.team===activeTeam);
-  if(!items.length){
-    document.getElementById('sports-list').innerHTML='<div class="empty">No recent updates</div>';
-    return;
-  }
+  if(!items.length){document.getElementById('sports-list').innerHTML='<div class="empty">No recent updates</div>';return;}
   document.getElementById('sports-list').innerHTML=items.map(s=>{
     if(s.type==='score'){
       const tn=TNAMES[s.team]||s.team.toUpperCase().slice(0,3);
       const opp=s.opponent.slice(0,3).toUpperCase();
       const livePip=s.live?`<span class="live-dot" style="margin-left:4px"></span>`:'';
-      return `<div class="scard">
-        <div class="scard-hd">${s.status}${livePip}</div>
-        <div class="steams">
-          <div class="steam"><div class="steam-n">${tn}</div><div class="steam-s">${s.teamScore}</div></div>
-          <div class="sdash">—</div>
-          <div class="steam"><div class="steam-n">${opp}</div><div class="steam-s">${s.oppScore}</div></div>
-        </div>
-      </div>`;
+      return `<div class="scard"><div class="scard-hd">${s.status}${livePip}</div><div class="steams"><div class="steam"><div class="steam-n">${tn}</div><div class="steam-s">${s.teamScore}</div></div><div class="sdash">—</div><div class="steam"><div class="steam-n">${opp}</div><div class="steam-s">${s.oppScore}</div></div></div></div>`;
     }
-    return `<a class="hl" href="${s.url||'#'}" target="_blank" style="border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;background:var(--glass)">
-      <div class="hl-t">${s.hl}</div>
-      <div class="hl-m"><span class="src-tag">${s.src||''}</span><span>·</span><span>${s.age} ago</span></div>
-    </a>`;
+    return `<a class="hl" href="${s.url||'#'}" target="_blank" style="border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;background:var(--glass)"><div class="hl-t">${s.hl}</div><div class="hl-m"><span class="src-tag">${s.src||''}</span><span>·</span><span>${s.age} ago</span></div></a>`;
   }).join('');
 }
 
 renderNews();renderSports();
 
-// ── NOTES ───────────────────────────────────────
 let notes=[];
 try{notes=JSON.parse(localStorage.getItem('dash_notes')||'[]')}catch(e){}
 
 function renderNotes(){
   const el=document.getElementById('notes-list');
-  if(!notes.length){el.innerHTML='<div class="empty">No saved notes</div>';return}
+  if(!notes.length){el.innerHTML='<div class="empty">No saved notes</div>';return;}
   el.innerHTML=[...notes].reverse().map((n,ri)=>{
     const i=notes.length-1-ri;
-    return `<div class="noterow">
-      <span class="note-time">${n.t}</span>
-      <span class="note-text">${escHtml(n.text)}</span>
-      <button class="note-del" onclick="delNote(${i})" aria-label="Delete note">×</button>
-    </div>`;
+    return `<div class="noterow"><span class="note-time">${n.t}</span><span class="note-text">${escHtml(n.text)}</span><button class="note-del" onclick="delNote(${i})" aria-label="Delete note">×</button></div>`;
   }).join('');
 }
 
-function escHtml(s){
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 function saveNote(){
   const el=document.getElementById('cap-input');
   const text=el.value.trim();
   if(!text)return;
   const now=new Date();
-  const t=now.toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit'});
-  notes.push({text,t});
+  notes.push({text,t:now.toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit'})});
   try{localStorage.setItem('dash_notes',JSON.stringify(notes))}catch(e){}
   el.value='';
   renderNotes();
@@ -657,21 +642,17 @@ function delNote(i){
 }
 
 document.getElementById('cap-input').addEventListener('keydown',function(e){
-  if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){saveNote()}
+  if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){saveNote();}
 });
 
 renderNotes();
 
-// ── VOICE DICTATION ───────────────────────────────────────────
 let rec=null,isRec=false;
 function toggleVoice(){
   const btn=document.getElementById('voice-btn');
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){alert('Speech recognition unavailable. Try Chrome or the Tesla browser with microphone access.');return}
-  if(isRec){
-    rec&&rec.stop();
-    return;
-  }
+  if(!SR){alert('Speech recognition unavailable in this browser.');return;}
+  if(isRec){rec&&rec.stop();return;}
   rec=new SR();
   rec.continuous=true;
   rec.interimResults=true;
@@ -686,16 +667,8 @@ function toggleVoice(){
     base+=fin;
     document.getElementById('cap-input').value=base+int;
   };
-  rec.onend=function(){
-    isRec=false;
-    btn.textContent='🎤 Dictate';
-    btn.classList.remove('rec');
-  };
-  rec.onerror=function(){
-    isRec=false;
-    btn.textContent='🎤 Dictate';
-    btn.classList.remove('rec');
-  };
+  rec.onend=function(){isRec=false;btn.textContent='🎤 Dictate';btn.classList.remove('rec');};
+  rec.onerror=function(){isRec=false;btn.textContent='🎤 Dictate';btn.classList.remove('rec');};
   rec.start();
   isRec=true;
   btn.textContent='⏹ Stop';
