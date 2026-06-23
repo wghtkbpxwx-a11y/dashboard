@@ -6,34 +6,68 @@
 <title>Dashboard</title>
 <style>
 :root {
-  --bg:        #0c0c0e;
-  --bg2:       #131316;
-  --bg3:       #1a1a1e;
-  --bg4:       #232328;
-  --bg5:       #2c2c32;
-  --line:      rgba(255,255,255,0.065);
-  --line2:     rgba(255,255,255,0.11);
-  --t1:        #eaeaec;
-  --t2:        #8a8a94;
-  --t3:        #4e4e58;
-  --accent:    #5b9cf6;
-  --accent-bg: rgba(91,156,246,0.10);
-  --accent-b:  rgba(91,156,246,0.28);
-  --red:       #e05252;
-  --r: 9px;
-  --rs: 6px;
+  --bg:        #04050a;
+  --bg2:       #070912;
+  --surface:   rgba(255,255,255,0.022);
+  --surface2:  rgba(255,255,255,0.045);
+  --glass:     rgba(12,16,28,0.55);
+  --line:      rgba(255,255,255,0.055);
+  --line2:     rgba(255,255,255,0.10);
+  --t1:        #f3f6fc;
+  --t2:        #97a2b6;
+  --t3:        #565f73;
+  --accent:    #6cb4ff;
+  --accent2:   #3d7fe0;
+  --accent-bg: rgba(108,180,255,0.10);
+  --accent-b:  rgba(108,180,255,0.30);
+  --glow:      rgba(108,180,255,0.45);
+  --red:       #ff5d5d;
+  --r:  16px;
+  --rs: 12px;
   --f: -apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{background:var(--bg)}
+
+html{
+  background:#04050a;
+  /* deep-space horizon glow */
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, rgba(108,180,255,0.10), transparent 60%),
+    radial-gradient(90% 60% at 85% 8%, rgba(120,90,220,0.08), transparent 55%),
+    linear-gradient(180deg,#070a14 0%,#04050a 45%,#020308 100%);
+  background-attachment:fixed;
+}
+
+/* ── STARFIELD ── */
+#stars{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 18%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(1px 1px at 28% 62%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1.4px 1.4px at 44% 28%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 62% 74%, rgba(255,255,255,0.30), transparent),
+    radial-gradient(1.3px 1.3px at 76% 22%, rgba(200,220,255,0.55), transparent),
+    radial-gradient(1px 1px at 88% 56%, rgba(255,255,255,0.32), transparent),
+    radial-gradient(1.1px 1.1px at 18% 84%, rgba(255,255,255,0.30), transparent),
+    radial-gradient(1.5px 1.5px at 54% 90%, rgba(180,210,255,0.40), transparent),
+    radial-gradient(1px 1px at 8% 46%, rgba(255,255,255,0.28), transparent),
+    radial-gradient(1.2px 1.2px at 70% 40%, rgba(255,255,255,0.40), transparent),
+    radial-gradient(1px 1px at 36% 8%, rgba(255,255,255,0.30), transparent),
+    radial-gradient(1.3px 1.3px at 94% 80%, rgba(200,220,255,0.42), transparent);
+  background-repeat:no-repeat;
+  animation:twinkle 6s ease-in-out infinite;
+}
+@keyframes twinkle{0%,100%{opacity:0.85}50%{opacity:0.55}}
+
 body{
-  background:var(--bg);
+  position:relative;z-index:1;
+  background:transparent;
   color:var(--t1);
   font-family:var(--f);
   min-height:100dvh;
   -webkit-font-smoothing:antialiased;
   overscroll-behavior:none;
-  max-width:540px;
+  max-width:560px;
   margin:0 auto;
 }
 a{color:inherit;text-decoration:none}
@@ -44,246 +78,299 @@ button{font-family:var(--f);cursor:pointer}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:env(safe-area-inset-top,12px) 20px 12px;
-  border-bottom:1px solid var(--line);
+  padding:calc(env(safe-area-inset-top,0px) + 16px) 24px 16px;
   position:sticky;
   top:0;
   z-index:200;
-  background:var(--bg);
-  backdrop-filter:blur(20px);
+  background:linear-gradient(180deg,rgba(4,5,10,0.92),rgba(4,5,10,0.65));
+  backdrop-filter:blur(24px) saturate(140%);
+  -webkit-backdrop-filter:blur(24px) saturate(140%);
+  border-bottom:1px solid var(--line);
 }
-#s-left{display:flex;flex-direction:column;gap:2px}
-#s-time{font-size:32px;font-weight:300;letter-spacing:-0.6px;line-height:1}
-#s-date{font-size:15px;letter-spacing:0.8px;text-transform:uppercase;color:var(--t2)}
-#s-right{display:flex;gap:14px;align-items:center}
-.s-chip{font-size:15px;color:var(--t2);letter-spacing:0.2px}
-.s-chip.live{color:var(--accent);display:flex;align-items:center;gap:5px}
+#s-left{display:flex;flex-direction:column;gap:3px}
+#s-time{
+  font-size:38px;font-weight:200;letter-spacing:-1px;line-height:1;
+  font-variant-numeric:tabular-nums;
+  text-shadow:0 0 24px rgba(108,180,255,0.25);
+}
+#s-date{font-size:13px;letter-spacing:2.4px;text-transform:uppercase;color:var(--t3);font-weight:500}
+#s-right{display:flex;gap:10px;align-items:center}
+.s-chip.live{
+  font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:600;
+  color:var(--accent);
+  display:flex;align-items:center;gap:7px;
+  padding:7px 13px;border-radius:100px;
+  background:var(--accent-bg);
+  border:1px solid var(--accent-b);
+}
 .live-dot{
   width:6px;height:6px;border-radius:50%;
   background:var(--accent);
+  box-shadow:0 0 8px var(--glow);
   animation:blink 2.4s infinite;
 }
-@keyframes blink{0%,100%{opacity:1}55%{opacity:0.25}}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 8px var(--glow)}55%{opacity:0.3;box-shadow:0 0 2px var(--glow)}}
 
 /* ── MODE NAV ── */
 #modenav{
   display:flex;
-  gap:2px;
-  padding:10px 14px;
-  overflow-x:auto;
-  scrollbar-width:none;
-  border-bottom:1px solid var(--line);
+  gap:6px;
+  padding:14px 20px;
   position:sticky;
-  top:62px;
+  top:84px;
   z-index:199;
-  background:var(--bg);
+  background:linear-gradient(180deg,rgba(4,5,10,0.85),rgba(4,5,10,0.4));
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
 }
-#modenav::-webkit-scrollbar{display:none}
 .modebt{
-  flex-shrink:0;
-  padding:11px 24px;
-  border-radius:22px;
-  border:none;
-  background:transparent;
+  flex:1;
+  padding:13px 18px;
+  border-radius:100px;
+  border:1px solid transparent;
+  background:var(--surface);
   color:var(--t3);
-  font-size:17px;
-  font-weight:500;
-  letter-spacing:0.5px;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:1.4px;
   text-transform:uppercase;
-  transition:color .18s,background .18s;
+  transition:all .22s ease;
 }
-.modebt.on{background:var(--accent);color:#fff}
-.modebt:hover:not(.on){color:var(--t2)}
+.modebt.on{
+  background:linear-gradient(180deg,rgba(108,180,255,0.16),rgba(108,180,255,0.06));
+  border-color:var(--accent-b);
+  color:#fff;
+  box-shadow:0 0 24px -6px var(--glow), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.modebt:not(.on):active{background:var(--surface2)}
 
 /* ── PANELS ── */
-#content{padding-bottom:env(safe-area-inset-bottom,24px)}
-.panel{display:none;animation:fadeIn .2s ease}
+#content{padding:6px 16px env(safe-area-inset-bottom,28px)}
+.panel{display:none;animation:fadeIn .28s ease}
 .panel.on{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ── SHARED COMPONENTS ── */
+/* ── SECTION LABEL ── */
 .sec{
-  padding:22px 20px 9px;
-  font-size:13px;
+  padding:24px 8px 12px;
+  font-size:11px;
   font-weight:600;
-  letter-spacing:1.1px;
+  letter-spacing:2.2px;
   text-transform:uppercase;
   color:var(--t3);
+  display:flex;align-items:center;gap:10px;
+}
+.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
+
+/* ── APP ROWS (glass card group) ── */
+.cardgroup{
+  background:var(--glass);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  overflow:hidden;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 }
 .row{
   display:flex;
   align-items:center;
-  padding:20px 22px;
+  padding:16px 18px;
   border-bottom:1px solid var(--line);
-  gap:18px;
-  cursor:pointer;
-  transition:background .14s;
+  gap:16px;
+  transition:background .16s;
   color:inherit;
 }
-.row:hover,.row:active{background:var(--bg2)}
-.icon{
-  width:54px;height:54px;border-radius:14px;
-  background:var(--bg3);
+.row:last-child{border-bottom:none}
+.row:active{background:var(--surface2)}
+
+/* ── REAL APP ICONS ── */
+.appicon{
+  width:52px;height:52px;
+  border-radius:15px;
+  flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:26px;
+  position:relative;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.18);
 }
-.icon.accent{background:var(--accent-bg);border:1px solid var(--accent-b)}
-.icon-wa{background:#20c65a;color:#fff;font-size:22px;font-weight:700}
-.icon-tg{background:#2aabee;color:#fff;font-size:22px;font-weight:700}
-.icon-ms{background:linear-gradient(135deg,#0082fb,#a239ca);color:#fff;font-size:22px;font-weight:700}
-.icon-gm{background:#ea4335;color:#fff;font-size:22px;font-weight:700}
+.appicon svg{width:30px;height:30px;display:block}
+.ic-wa{background:linear-gradient(150deg,#2af34f 0%,#23c95c 45%,#0fa362 100%)}
+.ic-wa{box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(37,211,102,0.6)}
+.ic-tg{background:linear-gradient(150deg,#3ec6ff 0%,#1d9bdf 60%,#0d83c4 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(45,171,238,0.6)}
+.ic-ms{background:linear-gradient(150deg,#00c6ff 0%,#0a7cff 42%,#9a3df0 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 8px 22px -8px rgba(98,103,255,0.6)}
+.ic-gm{background:linear-gradient(150deg,#ffffff,#f1f3f6);box-shadow:inset 0 1px 0 rgba(255,255,255,0.9),0 8px 22px -8px rgba(234,67,53,0.45)}
+
 .rl{flex:1;min-width:0}
-.rl-t{font-size:22px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rl-s{font-size:16px;color:var(--t2);margin-top:4px}
-.chev{color:var(--t3);font-size:22px;line-height:1;flex-shrink:0}
+.rl-t{font-size:19px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-0.2px}
+.rl-s{font-size:13px;color:var(--t3);margin-top:3px;letter-spacing:0.2px}
+.chev{color:var(--t3);font-size:22px;line-height:1;flex-shrink:0;font-weight:300}
 
 /* ── INNER TABS ── */
 .itabs{
   display:flex;
-  padding:0 20px;
-  border-bottom:1px solid var(--line);
-  gap:0;
+  gap:8px;
+  padding:6px 8px 14px;
 }
 .itab{
-  padding:18px 0;
-  margin-right:30px;
-  font-size:19px;
-  font-weight:500;
+  padding:10px 22px;
+  border-radius:100px;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
   color:var(--t3);
-  cursor:pointer;
-  border-bottom:2px solid transparent;
-  transition:color .18s,border-color .18s;
-  letter-spacing:0.1px;
+  background:var(--surface);
+  border:1px solid transparent;
+  transition:all .2s;
 }
-.itab.on{color:var(--t1);border-bottom-color:var(--accent)}
+.itab.on{
+  color:#fff;
+  background:var(--accent-bg);
+  border-color:var(--accent-b);
+  box-shadow:0 0 18px -6px var(--glow);
+}
 
 /* ── NEWS HEADLINES ── */
 .hl{
-  padding:18px 20px;
-  border-bottom:1px solid var(--line);
-  cursor:pointer;
-  transition:background .14s;
   display:block;
+  padding:16px 18px;
+  border-bottom:1px solid var(--line);
+  transition:background .16s;
 }
-.hl:hover,.hl:active{background:var(--bg2)}
-.hl-t{font-size:20px;line-height:1.45;color:var(--t1);font-weight:400}
-.hl-m{font-size:15px;color:var(--t3);margin-top:7px;display:flex;gap:6px}
-.src-tag{color:var(--t2)}
+.hl:last-child{border-bottom:none}
+.hl:active{background:var(--surface2)}
+.hl-t{font-size:17px;line-height:1.42;color:var(--t1);font-weight:500;letter-spacing:-0.1px}
+.hl-m{font-size:12px;color:var(--t3);margin-top:8px;display:flex;gap:7px;align-items:center;letter-spacing:0.4px;text-transform:uppercase}
+.src-tag{color:var(--accent)}
+
+.subhead{
+  padding:4px 8px 12px;
+  display:flex;align-items:center;gap:9px;
+  font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--t3);font-weight:600;
+}
 
 /* ── TEAM CHIPS ── */
 .teamfilter{
-  display:flex;gap:7px;
-  padding:12px 16px;
+  display:flex;gap:8px;
+  padding:4px 2px 16px;
   overflow-x:auto;scrollbar-width:none;
-  border-bottom:1px solid var(--line);
 }
 .teamfilter::-webkit-scrollbar{display:none}
 .tchip{
   flex-shrink:0;
-  padding:10px 18px;
-  border-radius:18px;
+  padding:9px 16px;
+  border-radius:100px;
   border:1px solid var(--line2);
-  background:transparent;
+  background:var(--surface);
   color:var(--t2);
-  font-size:16px;
-  font-weight:500;
-  letter-spacing:0.3px;
-  transition:all .18s;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:0.4px;
+  transition:all .2s;
 }
 .tchip.on{
   background:var(--accent-bg);
   border-color:var(--accent-b);
   color:var(--accent);
+  box-shadow:0 0 16px -6px var(--glow);
 }
 
 /* ── SCORE CARD ── */
 .scard{
-  margin:12px 16px;
-  padding:16px 18px;
-  background:var(--bg2);
-  border:1px solid var(--line2);
+  margin-bottom:12px;
+  padding:18px 20px;
+  background:var(--glass);
+  border:1px solid var(--line);
   border-radius:var(--r);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 }
 .scard-hd{
-  font-size:13px;text-transform:uppercase;letter-spacing:0.9px;
-  color:var(--t3);margin-bottom:12px;display:flex;align-items:center;gap:7px;
+  font-size:11px;text-transform:uppercase;letter-spacing:1.6px;
+  color:var(--t3);margin-bottom:14px;display:flex;align-items:center;gap:8px;font-weight:600;
 }
 .steams{display:flex;align-items:center;justify-content:space-between}
 .steam{text-align:center;flex:1}
-.steam-n{font-size:16px;font-weight:500;color:var(--t2);letter-spacing:0.3px}
-.steam-s{font-size:50px;font-weight:200;letter-spacing:-1.5px;color:var(--t1);line-height:1.1}
-.sdash{font-size:15px;color:var(--t3);padding:0 10px}
+.steam-n{font-size:14px;font-weight:600;color:var(--t2);letter-spacing:1px;text-transform:uppercase}
+.steam-s{
+  font-size:48px;font-weight:200;letter-spacing:-2px;color:var(--t1);line-height:1.1;margin-top:4px;
+  font-variant-numeric:tabular-nums;
+  text-shadow:0 0 20px rgba(108,180,255,0.2);
+}
+.sdash{font-size:18px;color:var(--t3);padding:0 14px;font-weight:200}
 
 /* ── CAPTURE ── */
-.capwrap{padding:16px}
 .capbox{
   width:100%;
-  background:var(--bg2);
+  background:var(--glass);
   border:1px solid var(--line2);
   border-radius:var(--r);
   color:var(--t1);
   font-family:var(--f);
-  font-size:20px;
-  line-height:1.5;
-  padding:16px 18px;
-  min-height:140px;
+  font-size:18px;
+  line-height:1.55;
+  padding:18px 20px;
+  min-height:150px;
   resize:none;
   outline:none;
-  transition:border-color .2s;
+  transition:border-color .2s,box-shadow .2s;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 }
-.capbox:focus{border-color:var(--accent)}
+.capbox:focus{border-color:var(--accent-b);box-shadow:0 0 28px -10px var(--glow)}
 .capbox::placeholder{color:var(--t3)}
-.capbtns{display:flex;gap:8px;margin-top:10px}
+.capbtns{display:flex;gap:10px;margin-top:12px}
 .btn{
-  padding:15px 22px;border-radius:var(--rs);
-  border:none;font-size:17px;font-weight:500;
-  transition:opacity .15s,background .15s;
+  padding:14px 22px;border-radius:100px;
+  border:1px solid transparent;font-size:15px;font-weight:600;letter-spacing:0.4px;
+  transition:all .18s;
 }
-.btn-pri{background:var(--accent);color:#fff}
-.btn-pri:hover{opacity:0.88}
-.btn-ghost{background:var(--bg3);color:var(--t2);border:1px solid var(--line2)}
-.btn-ghost:hover{background:var(--bg4)}
+.btn-pri{
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+  color:#fff;
+  box-shadow:0 0 24px -8px var(--glow);
+}
+.btn-pri:active{transform:scale(0.97)}
+.btn-ghost{background:var(--surface);color:var(--t2);border-color:var(--line2)}
+.btn-ghost:active{background:var(--surface2)}
 .btn-voice{
-  background:var(--bg3);color:var(--t2);
-  border:1px solid var(--line2);
-  display:flex;align-items:center;gap:5px;
-  margin-left:auto;
+  display:flex;align-items:center;gap:6px;margin-left:auto;
 }
 .btn-voice.rec{
-  background:rgba(224,82,82,0.10);
+  background:rgba(255,93,93,0.12);
   color:var(--red);
-  border-color:rgba(224,82,82,0.28);
+  border-color:rgba(255,93,93,0.35);
+  box-shadow:0 0 20px -8px rgba(255,93,93,0.6);
 }
 
 /* ── NOTES LIST ── */
 .noterow{
   display:flex;align-items:flex-start;
-  padding:13px 20px;border-bottom:1px solid var(--line);
-  gap:10px;
+  padding:15px 18px;border-bottom:1px solid var(--line);
+  gap:14px;
 }
-.note-time{font-size:13px;color:var(--t3);flex-shrink:0;padding-top:3px;letter-spacing:0.3px}
-.note-text{flex:1;font-size:16px;color:var(--t2);line-height:1.45}
+.noterow:last-child{border-bottom:none}
+.note-time{font-size:12px;color:var(--accent);flex-shrink:0;padding-top:3px;letter-spacing:0.5px;font-variant-numeric:tabular-nums}
+.note-text{flex:1;font-size:16px;color:var(--t1);line-height:1.5}
 .note-del{
   background:none;border:none;
-  color:var(--t3);font-size:20px;line-height:1;
-  flex-shrink:0;padding:0;cursor:pointer;
+  color:var(--t3);font-size:22px;line-height:1;
+  flex-shrink:0;padding:0 4px;cursor:pointer;
   transition:color .15s;
 }
-.note-del:hover{color:var(--red)}
-
-/* ── DIVIDER ── */
-.divider{height:1px;background:var(--line);margin:4px 0}
+.note-del:active{color:var(--red)}
 
 /* ── EMPTY ── */
-.empty{padding:24px;font-size:15px;color:var(--t3);text-align:center}
+.empty{padding:32px;font-size:14px;color:var(--t3);text-align:center;letter-spacing:0.4px}
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:3px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:3px}
 </style>
 </head>
 <body>
+
+<div id="stars"></div>
 
 <!-- ══ STATUS BAR ══ -->
 <header id="status">
@@ -292,7 +379,6 @@ button{font-family:var(--f);cursor:pointer}
     <div id="s-date">———</div>
   </div>
   <div id="s-right">
-    <span class="s-chip" id="s-weather">— °</span>
     <span class="s-chip live"><span class="live-dot"></span>Live</span>
   </div>
 </header>
@@ -318,11 +404,8 @@ button{font-family:var(--f);cursor:pointer}
 
   <!-- News sub-panel -->
   <div id="sub-news">
-    <div style="padding:14px 20px 4px;display:flex;align-items:center;gap:8px">
-      <span class="live-dot"></span>
-      <span style="font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">Headlines</span>
-    </div>
-    <div id="news-list"></div>
+    <div class="subhead"><span class="live-dot"></span>Headlines</div>
+    <div class="cardgroup" id="news-list"></div>
     <!--
       SWAP FEEDS: Replace NEWS array in JS below with fetched data.
       Recommended sources: CBC RSS, Globe & Mail, Reuters, AP News.
@@ -353,28 +436,40 @@ button{font-family:var(--f);cursor:pointer}
 <section class="panel" id="panel-msg">
 
   <div class="sec">Messaging</div>
-  <a class="row" href="https://web.whatsapp.com" target="_blank">
-    <div class="icon icon-wa">W</div>
-    <div class="rl"><div class="rl-t">WhatsApp</div><div class="rl-s">Open chats</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://web.telegram.org" target="_blank">
-    <div class="icon icon-tg">T</div>
-    <div class="rl"><div class="rl-t">Telegram</div><div class="rl-s">Open chats</div></div>
-    <span class="chev">›</span>
-  </a>
-  <a class="row" href="https://www.messenger.com" target="_blank">
-    <div class="icon icon-ms">M</div>
-    <div class="rl"><div class="rl-t">Messenger</div><div class="rl-s">Facebook Messenger</div></div>
-    <span class="chev">›</span>
-  </a>
+  <div class="cardgroup">
+    <a class="row" href="https://web.whatsapp.com" target="_blank">
+      <div class="appicon ic-wa">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      </div>
+      <div class="rl"><div class="rl-t">WhatsApp</div><div class="rl-s">Open chats</div></div>
+      <span class="chev">›</span>
+    </a>
+    <a class="row" href="https://web.telegram.org" target="_blank">
+      <div class="appicon ic-tg">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </div>
+      <div class="rl"><div class="rl-t">Telegram</div><div class="rl-s">Open chats</div></div>
+      <span class="chev">›</span>
+    </a>
+    <a class="row" href="https://www.messenger.com" target="_blank">
+      <div class="appicon ic-ms">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M.001 11.639C.001 4.949 5.241 0 12 0s12 4.95 12 11.639c0 6.689-5.241 11.638-12 11.638-1.214 0-2.379-.16-3.473-.46a.96.96 0 0 0-.641.046l-2.379 1.05a.96.96 0 0 1-1.348-.849l-.065-2.134a.96.96 0 0 0-.322-.68C1.07 17.516.001 14.74.001 11.639zm8.32-2.19l-3.525 5.591c-.338.537.322 1.18.832.808l3.787-2.873a.72.72 0 0 1 .866-.001l2.804 2.102a1.8 1.8 0 0 0 2.6-.48l3.525-5.59c.338-.537-.322-1.181-.832-.81l-3.787 2.874a.72.72 0 0 1-.866 0L11.92 8.97a1.8 1.8 0 0 0-2.6.48z"/></svg>
+      </div>
+      <div class="rl"><div class="rl-t">Messenger</div><div class="rl-s">Facebook Messenger</div></div>
+      <span class="chev">›</span>
+    </a>
+  </div>
 
   <div class="sec">Email</div>
-  <a class="row" href="https://mail.google.com" target="_blank">
-    <div class="icon icon-gm">G</div>
-    <div class="rl"><div class="rl-t">Gmail</div><div class="rl-s">Open inbox</div></div>
-    <span class="chev">›</span>
-  </a>
+  <div class="cardgroup">
+    <a class="row" href="https://mail.google.com" target="_blank">
+      <div class="appicon ic-gm">
+        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64V21h-1.636z"/><path fill="#34A853" d="M5.455 21H1.636A1.636 1.636 0 0 1 0 19.366V5.457L5.455 9.548z"/><path fill="#EA4335" d="M5.455 9.548V21H12v-4.36L5.455 11.73z"/><path fill="#FBBC04" d="M0 5.457v.001L5.455 9.548V4.64L3.927 3.493C2.309 2.28 0 3.434 0 5.457z"/><path fill="#C5221F" d="M24 5.457v.001L18.545 9.548V4.64l1.528-1.147C21.691 2.28 24 3.434 24 5.457z"/><path fill="#fff" d="M5.455 4.64v4.908L12 14.458l6.545-4.91V4.64L12 9.548z"/></svg>
+      </div>
+      <div class="rl"><div class="rl-t">Gmail</div><div class="rl-s">Open inbox</div></div>
+      <span class="chev">›</span>
+    </a>
+  </div>
 
 </section>
 
@@ -383,31 +478,30 @@ button{font-family:var(--f);cursor:pointer}
 ══════════════════════════ -->
 <section class="panel" id="panel-cap">
 
-  <div class="capwrap">
-    <textarea
-      class="capbox"
-      id="cap-input"
-      placeholder="Speak or type a thought…"
-      rows="5"
-      autocorrect="on"
-      autocapitalize="sentences"
-    ></textarea>
-    <div class="capbtns">
-      <button class="btn btn-pri" onclick="saveNote()">Save</button>
-      <button class="btn btn-ghost" onclick="clearCap()">Clear</button>
-      <button class="btn btn-voice btn-ghost" id="voice-btn" onclick="toggleVoice()">🎤 Dictate</button>
-    </div>
+  <div class="sec">Capture</div>
+  <textarea
+    class="capbox"
+    id="cap-input"
+    placeholder="Speak or type a thought…"
+    rows="5"
+    autocorrect="on"
+    autocapitalize="sentences"
+  ></textarea>
+  <div class="capbtns">
+    <button class="btn btn-pri" onclick="saveNote()">Save</button>
+    <button class="btn btn-ghost" onclick="clearCap()">Clear</button>
+    <button class="btn btn-voice btn-ghost" id="voice-btn" onclick="toggleVoice()">🎤 Dictate</button>
   </div>
 
   <div class="sec">Saved</div>
-  <div id="notes-list"></div>
+  <div class="cardgroup" id="notes-list"></div>
 
 </section>
 
 </main>
 
 <script>
-// ── CLOCK ──────────────────────────────────────────────
+// ── CLOCK ───────────────────────────────────
 function tick(){
   const n=new Date();
   const h=String(n.getHours()).padStart(2,'0');
@@ -419,23 +513,7 @@ function tick(){
 }
 tick();setInterval(tick,15000);
 
-// ── WEATHER (optional) ───────────────────────────────
-// SWAP: Replace with your OpenWeatherMap or WeatherAPI key + coordinates
-// Example: https://api.openweathermap.org/data/2.5/weather?lat=LAT&lon=LON&units=metric&appid=YOUR_KEY
-/*
-async function loadWeather(){
-  try{
-    const r=await fetch('YOUR_WEATHER_API_URL');
-    const d=await r.json();
-    const temp=Math.round(d.main.temp)+'°C';
-    const cond=d.weather[0].main;
-    document.getElementById('s-weather').textContent=temp+' · '+cond;
-  }catch(e){}
-}
-loadWeather();
-*/
-
-// ── PANEL SWITCHING ──────────────────────────────────
+// ── PANEL SWITCHING ──────────────────────────────
 function switchPanel(id){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.modebt').forEach(b=>b.classList.remove('on'));
@@ -446,7 +524,7 @@ document.querySelectorAll('.modebt').forEach(btn=>{
   btn.addEventListener('click',()=>switchPanel(btn.dataset.p));
 });
 
-// ── INNER TABS ─────────────────────────────────────────
+// ── INNER TABS ──────────────────────────────────
 document.querySelectorAll('.itab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.itab').forEach(t=>t.classList.remove('on'));
@@ -456,7 +534,7 @@ document.querySelectorAll('.itab').forEach(tab=>{
   });
 });
 
-// ── TEAM FILTER ────────────────────────────────────────────
+// ── TEAM FILTER ─────────────────────────────────
 let activeTeam='all';
 document.querySelectorAll('.tchip').forEach(c=>{
   c.addEventListener('click',()=>{
@@ -467,7 +545,7 @@ document.querySelectorAll('.tchip').forEach(c=>{
   });
 });
 
-// ── NEWS DATA ──────────────────────────────────────────────
+// ── NEWS DATA ──────────────────────────────────────
 // SWAP: Replace this array with a fetched/parsed RSS feed.
 // Each item: { hl, src, age, url }
 const NEWS=[
@@ -480,7 +558,7 @@ const NEWS=[
   {hl:'AI hiring surge slows as enterprise budgets reset for second half of year',src:'The Verge',age:'5h',url:'https://theverge.com'},
 ];
 
-// ── SPORTS DATA ────────────────────────────────────────────
+// ── SPORTS DATA ───────────────────────────────────────
 // SWAP: Replace with live data from ESPN, Sportsnet, TheSportsDB, or similar.
 // type: 'score' | 'news'
 const SPORTS=[
@@ -528,7 +606,7 @@ function renderSports(){
         </div>
       </div>`;
     }
-    return `<a class="hl" href="${s.url||'#'}" target="_blank">
+    return `<a class="hl" href="${s.url||'#'}" target="_blank" style="border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;background:var(--glass)">
       <div class="hl-t">${s.hl}</div>
       <div class="hl-m"><span class="src-tag">${s.src||''}</span><span>·</span><span>${s.age} ago</span></div>
     </a>`;
@@ -537,7 +615,7 @@ function renderSports(){
 
 renderNews();renderSports();
 
-// ── NOTES ──────────────────────────────────────────────
+// ── NOTES ───────────────────────────────────────
 let notes=[];
 try{notes=JSON.parse(localStorage.getItem('dash_notes')||'[]')}catch(e){}
 
@@ -584,7 +662,7 @@ document.getElementById('cap-input').addEventListener('keydown',function(e){
 
 renderNotes();
 
-// ── VOICE DICTATION ────────────────────────────────────────────
+// ── VOICE DICTATION ───────────────────────────────────────────
 let rec=null,isRec=false;
 function toggleVoice(){
   const btn=document.getElementById('voice-btn');
